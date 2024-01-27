@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/screens/main_setting_screen.dart';
+import 'package:hack_grocery_app/screens/notification_screen.dart';
+
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -26,6 +29,12 @@ class _GroupScreenState extends State<GroupScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    List<Widget> widgetOptions = 
+  <Widget>[
+    GroupScreen(),
+    NotificationScreen(),
+    SettingScreen()
+  ];
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
