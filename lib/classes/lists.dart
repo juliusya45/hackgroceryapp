@@ -19,12 +19,12 @@ class List
   factory List.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options,)
   {
     final data = snapshot.data();
-    return List{
-      id: '';
+    return List(
+      id: '',
       name: data!['name'],
       color: data!['color'],
       imgUrl: data!['imgUrl']
-    };
+    );
   }
 
   Map<String, dynamic> toFirestore()

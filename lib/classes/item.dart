@@ -11,18 +11,18 @@ class Item{
     required this.name,
     required this.description,
     this.imgUrl = ""
-  })
+  });
 
   //method to turn firestore data into a listing
   factory Item.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options,)
   {
     final data = snapshot.data();
-    return Item{
-      id: '';
+    return Item(
+      id: '',
       name: data!['name'],
       description: data!['description'],
       imgUrl: data!['imgUrl']
-    };
+    );
   }
 
   Map<String, dynamic> toFirestore()
