@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingHome extends StatefulWidget {
   const LoadingHome({super.key});
@@ -17,11 +18,20 @@ class _LoadingHomeState extends State<LoadingHome> {
       appBar: AppBar(
         title: Text("Loading Home"),
       ),
-      body:  Column(
+      body: Center(
+        child: Column(
+        
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          
+        LoadingAnimationWidget.prograssiveDots(
+        color: Colors.black,
+        size: 100),
           //this button is just for debugging, just in case we get stuck on this screen:
           ElevatedButton(
               child: Text("Sign Out"),
+              
               onPressed:() {
                 FirebaseAuth.instance.signOut();
                 Navigator.pushAndRemoveUntil(
@@ -47,9 +57,10 @@ class _LoadingHomeState extends State<LoadingHome> {
                         );
               },
               ),
-          Text("this would be the page where the user's data is preloaded"),
-          Text("before the groups screen is shown")
+          
         ],
+        
+      ),
       ),
     );
   }
