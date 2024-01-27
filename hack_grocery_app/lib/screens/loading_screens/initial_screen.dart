@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
+import 'package:hack_grocery_app/screens/authentication/verification_screen.dart';
+import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 
 class _InitialScreen extends StatefulWidget {
   const _InitialScreen({super.key});
