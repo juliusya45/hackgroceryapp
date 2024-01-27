@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/screens/authentication/login_screen.dart';
+import 'package:hack_grocery_app/screens/authentication/signup_screen.dart';
+import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
+import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,12 +18,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      theme: ThemeData(fontFamily: 'Inter',),
+      initialRoute: '/',
+      routes: {
+        //now goes to initialscreen and this checks to see if a user was logged in or not
+        '/': (context) => const _InitialScreen()
+      },
     );
   }
 }
