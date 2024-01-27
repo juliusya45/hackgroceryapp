@@ -7,6 +7,11 @@ import 'package:hack_grocery_app/screens/authentication/verification_screen.dart
 import 'package:hack_grocery_app/screens/groups_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
+import 'package:hack_grocery_app/screens/nav_screen.dart';
+import 'package:hack_grocery_app/screens/main_setting_screen.dart';
+import 'package:hack_grocery_app/screens/notification_screen.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,13 +28,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/',
+      initialRoute: '/nav',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
         '/groups': (context) => const GroupScreen(),
         '/verification': (context) => const VerificationScreen(),
-      '/loading_home': (context) => const LoadingHome()
+      '/loading_home': (context) => const LoadingHome(),
+      '/nav': (context) => const Nav()
       },
     );
   }

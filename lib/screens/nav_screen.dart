@@ -51,10 +51,6 @@ class _NavState extends State<Nav> {
         /// Settings page
         const SettingScreen()
       ][currentPageIndex],
-      floatingActionButton: const FloatingActionButton(
-              child: Icon(Icons.add_box_outlined),
-              onPressed: (null),
-      )
     );
   }
 }
