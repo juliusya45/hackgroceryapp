@@ -22,8 +22,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Inter',),
-      initialRoute: '/groups',
+      theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
+      initialRoute: '/',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
