@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,101 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmpasswordController = TextEditingController();
+
+  //String to hold error message that pops up when user encounters error:
+  String errorMsg = '';
+
+  Future signUp() async
+  {
+    try{
+      if(passwordConfirmed() && emptyCheck())
+      {
+        //set the error message to be nothing since there shouldn't
+        //be anymore errors
+        setState(() {
+          errorMsg = '';
+        });
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(), 
+          password: _passwordController.text.trim()
+        );
+
+        //If I need to add more details to a user add them here:
+
+        //Then push the user to the verification screen:
+        if (context.mounted) Navigator.pushReplacementNamed(context, '/verification');
+      }
+    }
+    //if there's an exception catch it and let the user know
+    on FirebaseAuthException catch (e)
+    {
+      if(kDebugMode)
+      {
+        print(e);
+        setState(() {
+          errorMsg = e.message!;
+        });
+      }
+    }
+  }
+
+  //checks to see that the passwords the user entered matches
+  bool passwordConfirmed()
+  {
+    if(_passwordController.text.trim() == _confirmpasswordController.text.trim())
+    {
+
+      return true;
+      
+    }
+    else
+    {
+      if(_confirmpasswordController.text.trim().isNotEmpty)
+      {
+        setState(() {
+        errorMsg = 'Passwords do not match';
+      });
+      }
+      else
+      {
+        setState(() {
+          errorMsg = 'Please confirm your password';
+        });
+      }
+      return false;
+    }
+  }
+
+  //checks to see if any fields are empty
+  //if any of them are empty it'll let the user know
+  bool emptyCheck()
+  {
+    if(_usernameController.text.trim().isEmpty)
+    {
+      setState(() {
+        errorMsg = 'Please type in your email';
+      });
+      return false;
+    }
+    else if(_emailController.text.trim().isEmpty)
+    {
+      setState(() {
+        errorMsg = 'Please type in a username';
+      });
+      return false;
+    }
+    else if(_passwordController.text.trim().isEmpty)
+    {
+      setState(() {
+        errorMsg = 'Please type in a password';
+      });
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +136,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 25),
                           ),
+                      ),
+                      const SizedBox(height: 20,),
+                      Text(errorMsg,
+                      style: const TextStyle(color: Colors.red),  
                       ),
                       const SizedBox(height: 20,),
 
@@ -138,7 +238,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 20,),
                         //Sign Up Button:
                         ElevatedButton(
-                          onPressed: (){}, 
+                          //Need to implement Signup function above
+                          onPressed: () {signUp();},
                           child: Text("Sign Up!")),
 
                       SizedBox(height: 50),

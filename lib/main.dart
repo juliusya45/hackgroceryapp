@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/firebase_options.dart';
 import 'package:hack_grocery_app/screens/authentication/login_screen.dart';
 import 'package:hack_grocery_app/screens/authentication/signup_screen.dart';
+import 'package:hack_grocery_app/screens/authentication/verification_screen.dart';
 import 'package:hack_grocery_app/screens/groups_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
@@ -26,7 +27,8 @@ class MainApp extends StatelessWidget {
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
-        '/groups': (context) => const GroupScreen()
+        '/groups': (context) => const GroupScreen(),
+        '/verification': (context) => const VerificationScreen()
       },
     );
   }
