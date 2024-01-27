@@ -28,7 +28,8 @@ class MainApp extends StatelessWidget {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
         '/groups': (context) => const GroupScreen(),
-        '/verification': (context) => const VerificationScreen()
+        '/verification': (context) => const VerificationScreen(),
+      '/loading_home': (context) => const LoadingHome()
       },
     );
   }
