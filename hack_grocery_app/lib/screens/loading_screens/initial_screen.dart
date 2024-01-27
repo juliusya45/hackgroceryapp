@@ -5,14 +5,14 @@ import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
 import 'package:hack_grocery_app/screens/authentication/verification_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 
-class _InitialScreen extends StatefulWidget {
-  const _InitialScreen({super.key});
+class InitialScreen extends StatefulWidget {
+  const InitialScreen({super.key});
 
   @override
-  State<_InitialScreen> createState() => __InitialScreenState();
+  State<InitialScreen> createState() => __InitialScreenState();
 }
 
-class __InitialScreenState extends State<_InitialScreen> {
+class __InitialScreenState extends State<InitialScreen> {
   final user = FirebaseAuth.instance.currentUser;
 
   @override
