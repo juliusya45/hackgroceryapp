@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class TempScreen extends StatefulWidget {
-  const TempScreen({super.key});
+class GroupScreen extends StatefulWidget {
+  const GroupScreen({super.key});
 
   @override
-  State<TempScreen> createState() => _TempScreenState();
+  State<GroupScreen> createState() => _GroupScreenState();
 }
 
-class _TempScreenState extends State<TempScreen> {
+class _GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
