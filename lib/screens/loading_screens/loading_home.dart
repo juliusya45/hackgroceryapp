@@ -37,13 +37,12 @@ class _LoadingHomeState extends State<LoadingHome> {
   }
 
   Future<void> setup() async{
-    await getUserData();
     //defining the reference to our database:
     final ref = database.collection('groups').orderBy('time').withConverter(
     fromFirestore:  Group.fromFirestore,
     toFirestore: (Group groups, _) => groups.toFirestore(),
     );
-
+    await getUserData();
     //once data populates from the database fill the list
     //of groups with groups that the user can access
     await ref.get().then((event)
