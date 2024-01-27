@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //String to hold error message that pops up when user encounters error:
   String errorMsg = '';
 
+  Future addUserData(String username, String uid, String email) async
+  {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      'username' : username,
+      'email' : email,
+      'groups' : []
+    });
+  }
+
   Future signUp() async
   {
     try{
@@ -34,6 +44,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           email: _emailController.text.trim(), 
           password: _passwordController.text.trim()
         );
+
+        addUserData(_usernameController.text.trim(), FirebaseAuth.instance.currentUser!.uid, _emailController.text.trim());
 
         //If I need to add more details to a user add them here:
 

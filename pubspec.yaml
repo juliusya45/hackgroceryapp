@@ -10,9 +10,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
-  flutter:
-    sdk: flutter
-    loading_animation_widget: ^1.2.0+4
+  loading_animation_widget: ^1.2.0+4
 
   rive: ^0.12.4
 
