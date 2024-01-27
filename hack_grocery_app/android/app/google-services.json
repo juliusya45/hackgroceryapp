@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "904971790378",
+    "project_id": "hack-grocery",
+    "storage_bucket": "hack-grocery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904971790378:android:56b98bab5daffb7b077b53",
+        "android_client_info": {
+          "package_name": "com.example.hack_grocery_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1fS4nl-b3qgTzRejIuhAG8RA4Abe70Pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
