@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -12,6 +15,32 @@ class LoadingHome extends StatefulWidget {
 }
 
 class _LoadingHomeState extends State<LoadingHome> {
+  //defining database
+  final database = FirebaseFirestore.instance;
+  List<Group> allGroups = [];
+  late AppUser sendUser;
+
+  Future<void> setup() async{
+    //defining the reference to our database:
+    final ref = database.collection('groups').orderBy('time').withConverter(
+    fromFirestore:  Group.fromFirestore,
+    toFirestore: (Group groups, _) => groups.toFirestore(),
+    );
+
+    //once data populates from the database fill the list
+    //of groups with groups that the user can access
+    await ref.get().then((event)
+    {
+      for(var doc in event.docs)
+      {
+        final groups = doc.data();
+        if(groups != null && groups.id == sendUser.groups.contains(groups.id))
+        {
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
