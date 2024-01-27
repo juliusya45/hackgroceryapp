@@ -131,6 +131,10 @@ class _GroupScreenState extends State<GroupScreen> {
           },
         ),
       ][currentPageIndex],
+      floatingActionButton: const FloatingActionButton(
+              child: Icon(Icons.add_box_outlined),
+              onPressed: (null),
+      )
     );
   }
 }
