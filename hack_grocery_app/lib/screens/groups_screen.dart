@@ -1,36 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ListsScreen extends StatefulWidget {
-  const ListsScreen({super.key});
+class TempScreen extends StatefulWidget {
+  const TempScreen({super.key});
 
   @override
-  State<ListsScreen> createState() => _ListsScreenState();
+  State<TempScreen> createState() => _TempScreenState();
 }
 
-class _ListsScreenState extends State<ListsScreen> {
-  bool _showFab = true;
-  bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.endDocked;
-
-  void _onShowNotchChanged(bool value) {
-    setState(() {
-      _showNotch = value;
-    });
-  }
-
-  void _onShowFabChanged(bool value) {
-    setState(() {
-      _showFab = value;
-    });
-  }
-
-  void _onFabLocationChanged(FloatingActionButtonLocation? value) {
-    setState(() {
-      _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
-    });
-  }
+class _TempScreenState extends State<TempScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -38,108 +16,65 @@ class _ListsScreenState extends State<ListsScreen> {
       home: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('Grocery Lists'),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.only(bottom: 88),
-          children: <Widget>[
-            SwitchListTile(
-              title: const Text(
-                'Floating Action Button',
-              ),
-              value: _showFab,
-              onChanged: _onShowFabChanged,
-            ),
-            SwitchListTile(
-              title: const Text('Notch'),
-              value: _showNotch,
-              onChanged: _onShowNotchChanged,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('Floating action button position'),
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Docked - End'),
-              value: FloatingActionButtonLocation.endDocked,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Docked - Center'),
-              value: FloatingActionButtonLocation.centerDocked,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Floating - End'),
-              value: FloatingActionButtonLocation.endFloat,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Floating - Center'),
-              value: FloatingActionButtonLocation.centerFloat,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
+          centerTitle: true,
+          title: const Text('Groups'),
+          actions: <Widget> [
+          IconButton(
+              tooltip: 'Open Group Settings',
+              icon: const Icon(Icons.more_vert),
+              color: Colors.white,
+              onPressed: () {},
             ),
           ],
         ),
-        floatingActionButton: _showFab
-            ? FloatingActionButton(
+        body: ListView(
+          
+        ),
+        floatingActionButton: 
+            FloatingActionButton(
                 onPressed: () {},
                 tooltip: 'Create',
                 child: const Icon(Icons.add),
-              )
-            : null,
-        floatingActionButtonLocation: _fabLocation,
-        bottomNavigationBar: _DemoBottomAppBar(
-          fabLocation: _fabLocation,
-          shape: _showNotch ? const CircularNotchedRectangle() : null,
+              ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        bottomNavigationBar: const _NavigationBar(
+          fabLocation: FloatingActionButtonLocation.centerFloat,
         ),
       ),
     );
   }
 }
 
-class _DemoBottomAppBar extends StatelessWidget {
-  const _DemoBottomAppBar({
-    this.fabLocation = FloatingActionButtonLocation.endDocked,
-    this.shape = const CircularNotchedRectangle(),
+class _NavigationBar extends StatelessWidget {
+
+  const _NavigationBar({
+    this.fabLocation = FloatingActionButtonLocation.endFloat,
   });
 
   final FloatingActionButtonLocation fabLocation;
-  final NotchedShape? shape;
-
-  static final List<FloatingActionButtonLocation> centerLocations =
-      <FloatingActionButtonLocation>[
-    FloatingActionButtonLocation.centerDocked,
-    FloatingActionButtonLocation.centerFloat,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      shape: shape,
       color: Colors.blue,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             IconButton(
               tooltip: 'Open navigation menu',
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
+              icon: const Icon(Icons.group_rounded),
+              onPressed: null,
             ),
-            if (centerLocations.contains(fabLocation)) const Spacer(),
             IconButton(
               tooltip: 'Search',
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.inbox_rounded),
               onPressed: () {},
             ),
             IconButton(
               tooltip: 'Favorite',
-              icon: const Icon(Icons.favorite),
+              icon: const Icon(Icons.settings),
               onPressed: () {},
             ),
           ],
