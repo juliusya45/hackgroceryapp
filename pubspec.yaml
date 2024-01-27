@@ -12,6 +12,8 @@ dependencies:
   firebase_core: ^2.24.2
   flutter:
     sdk: flutter
+    loading_animation_widget: ^1.2.0+4
+
   rive: ^0.12.4
 
 dev_dependencies:
