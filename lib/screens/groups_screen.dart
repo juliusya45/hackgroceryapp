@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class NextPage extends StatelessWidget {
@@ -19,7 +20,10 @@ class NextPage extends StatelessWidget {
 }
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+import 'package:hack_grocery_app/classes/group.dart';
 
+var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
+var emptyGroup2 = Group(color: 'ff42e6f5', id: '', name: 'Tests2', imgUrl: '');
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -64,18 +68,44 @@ class _GroupScreenState extends State<GroupScreen> {
         ),
       ],  
     ),
-      body:Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
+      body:
+      ListView(
+        padding: const EdgeInsets.all(8.0),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
           ),
-        ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup2),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup2),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          )
+        ]
+      ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
         key: _key,

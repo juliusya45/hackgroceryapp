@@ -33,19 +33,20 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //objects that hold empty data:
-    var emptyGroup = Group(color: '', id: '', name: '', imgUrl: '');
+    var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
     var emptyUser = AppUser(uid: '', username: '', email: '', groups: []);
 
 
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/',
+      initialRoute: '/group_screen',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
         '/nav': (context) => const Nav(),
         '/verification': (context) => const VerificationScreen(),
+        '/group_screen': (context) => const GroupScreen(),
         '/loading_home': (context) => const LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
       },
