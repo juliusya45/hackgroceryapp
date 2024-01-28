@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
+import 'package:clipboard/clipboard.dart';
 
 class GroupSettingScreen extends StatefulWidget {
   const GroupSettingScreen({super.key, required this.group});
@@ -60,6 +61,17 @@ class _GroupSettingScreenState extends State<GroupSettingScreen> {
        icon: Icon(Icons.drive_file_rename_outline_rounded)),
                   ],
                 ),
+      SizedBox(height: 20,),
+      GestureDetector(
+        child: Text("Group Code: " + group.id,
+          style: TextStyle(fontSize: 18),
+        ),
+        onTap: (){
+          FlutterClipboard.copy(group.id);
+        },
+        ),
+      SizedBox(height: 10,),
+      Text("Tap the code to copy & send!"),
       
        SizedBox(height: 400),
        ElevatedButton(

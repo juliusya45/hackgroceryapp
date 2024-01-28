@@ -194,7 +194,7 @@ class _GroupScreenState extends State<GroupScreen> {
             mouseCursor: MaterialStateMouseCursor.textable,
             onPressed: ()  async {
               await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateGroup(appUser: appUser)));
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
                 });
@@ -211,7 +211,7 @@ class _GroupScreenState extends State<GroupScreen> {
             onPressed: ()
               async {
               await Navigator.push(context, MaterialPageRoute(builder: (context)=> JoinGroup(appUser: appUser,)));
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
                 });

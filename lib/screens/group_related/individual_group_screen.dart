@@ -110,7 +110,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
       child: GestureDetector(
         onTap: () async {
           await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group,)));
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
                 });
@@ -151,7 +151,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
               child: Icon(Icons.add_box_outlined),
               onPressed: ()  async {
               await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateList(group: widget.group)));
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
                 });
