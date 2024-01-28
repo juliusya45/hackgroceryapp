@@ -7,6 +7,7 @@ import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
+//This screen is used when a list is clicked. Shows items
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -71,7 +72,7 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
               child: Icon(Icons.add_box_outlined),
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => CreateList(appUser: appUser, group:  groupsList[0]))));
+                    MaterialPageRoute(builder: ((context) => CreateList(group:  groupsList[0]))));
               }
       )
     );

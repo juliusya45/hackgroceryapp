@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/screens/list_related/create_list_screen.dart';
 import 'package:hack_grocery_app/screens/list_related/individual_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
@@ -9,6 +11,8 @@ import 'package:hack_grocery_app/classes/list_card.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
+//This screen is to show multiple lists once you tap a group
 
 
 class NavigationBarApp extends StatelessWidget {
@@ -132,9 +136,16 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
           }
         ),
       ),
-  floatingActionButton: const FloatingActionButton(
+  floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
-              onPressed: (null),
+              onPressed: ()  async {
+              await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateList(group: widget.group)));
+              Future.delayed(const Duration(seconds: 2), () {
+                setState(() {
+                  refresh();
+                });
+              });
+            },
       )
     );
   }
