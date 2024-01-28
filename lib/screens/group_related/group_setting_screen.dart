@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
 class GroupSettingScreen extends StatefulWidget {
-  const GroupSettingScreen({super.key});
+  const GroupSettingScreen({super.key, required this.group});
+
+  final Group group;
 
   @override
   State<GroupSettingScreen> createState() => _GroupSettingScreenState();
@@ -12,15 +15,19 @@ class GroupSettingScreen extends StatefulWidget {
 
 class _GroupSettingScreenState extends State<GroupSettingScreen> {
 
+
+
   final _groupNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+      var group = widget.group;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('temp name'),
+      title: Text(group.name),
       // title: Text(_groupNameController.text.trim()),
       centerTitle: true,
       

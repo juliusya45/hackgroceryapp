@@ -26,25 +26,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
     final ThemeData theme = Theme.of(context);
     // ignore: prefer_const_constructors
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Notifications'),
+      ),
       body: const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_sharp),
+                    title: Text('Notification 1'),
+                    subtitle: Text('This is a notification'),
+                  ),
                 ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_sharp),
+                    title: Text('Notification 2'),
+                    subtitle: Text('This is a notification'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/screens/group_related/group_setting_screen.dart';
 import 'package:hack_grocery_app/screens/list_related/create_list_screen.dart';
 import 'package:hack_grocery_app/screens/item_related/individual_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
@@ -101,13 +102,20 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Lists'),
+      title: Text(widget.group.name),
       centerTitle: true,
       actions: <Widget>[
       Padding(
       padding: EdgeInsets.only(right: 20.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () async {
+          await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group,)));
+              Future.delayed(const Duration(seconds: 2), () {
+                setState(() {
+                  refresh();
+                });
+              });
+        },
         child: Icon(
             Icons.more_vert
             ),
