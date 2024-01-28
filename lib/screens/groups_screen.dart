@@ -5,7 +5,6 @@ import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 
-var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -13,13 +12,15 @@ class NavigationBarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const GroupScreen(),
+      home: const GroupScreen(groupsList: [],),
     );
   }
 }
 
 class GroupScreen extends StatefulWidget {
-  const GroupScreen({super.key});
+  const GroupScreen({super.key, required this.groupsList});
+
+  final List<Group> groupsList;
 
   @override
   State<GroupScreen> createState() => _GroupScreenState();
@@ -28,6 +29,9 @@ class GroupScreen extends StatefulWidget {
 class _GroupScreenState extends State<GroupScreen> {
   @override
   Widget build(BuildContext context) {
+    //this is a list of group objects
+    List<Group> groupsList = widget.groupsList;
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -48,14 +52,24 @@ class _GroupScreenState extends State<GroupScreen> {
       ],  
     ),
       body:
-      ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          )
-        ]
+      ListView.builder
+      (
+        itemCount: groupsList.length,
+        itemBuilder: (context, index)
+        {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+            child: Card(
+              elevation: 3,
+              child: InkWell(
+                onTap: () {
+                  //function to view the corresponding group
+                },
+                child: GroupCard(groupItem: groupsList[index]),
+              ),
+            ),
+            );
+        }
       ),
   floatingActionButton: const FloatingActionButton(
               child: Icon(Icons.add_box_outlined),

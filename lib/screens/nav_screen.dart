@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/groups_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
 class Nav extends StatefulWidget{
-  const Nav({super.key,});
+  const Nav({super.key, required this.groupsList, required this.appUser});
+
+  final List<Group> groupsList;
+  final AppUser appUser;
+
   State<Nav> createState() => _NavState();
 }
 
@@ -15,6 +21,10 @@ class _NavState extends State<Nav> {
   
 @override
   Widget build(BuildContext context) {
+    final groupsList = widget.groupsList;
+    final appUser = widget.appUser;
+
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
@@ -43,7 +53,7 @@ class _NavState extends State<Nav> {
       ),
       body: <Widget>[
         /// Home page
-        const GroupScreen(),
+        GroupScreen(groupsList: groupsList),
 
         /// Notifications page
         const NotificationScreen(),
