@@ -44,10 +44,13 @@ class GroupScreen extends StatefulWidget {
 
 class _GroupScreenState extends State<GroupScreen> {
   final _key = GlobalKey<ExpandableFabState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
 
    //refresh method to allow user to refresh page:
     Future<void> refresh() async
     {
+      _refreshIndicatorKey.currentState?.show();
         //this is a list of group objects
       List<Group> groupsList = widget.groupsList;
       AppUser appUser = widget.appUser;
@@ -127,6 +130,10 @@ class _GroupScreenState extends State<GroupScreen> {
     ),
       body:
       RefreshIndicator(
+        key: _refreshIndicatorKey,
+        color: Colors.white,
+        backgroundColor: Colors.blue,
+        strokeWidth: 4.0,
         onRefresh: refresh,
         child: ListView.builder
         (

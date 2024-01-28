@@ -93,6 +93,7 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool check = false;
     final Lists list = widget.list;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
@@ -129,7 +130,7 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
                   onTap: () {
                     //this is where code would go to get a detailed menu to show for each item
                   },
-                  child: ItemCard(itemInst: items[index],),
+                  child: ItemCard(itemInst: items[index]),
                 ),
               ),
               );
