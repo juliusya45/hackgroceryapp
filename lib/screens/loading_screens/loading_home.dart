@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
-import 'package:hack_grocery_app/screens/groups_screen.dart';
+import 'package:hack_grocery_app/screens/group_related/groups_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 

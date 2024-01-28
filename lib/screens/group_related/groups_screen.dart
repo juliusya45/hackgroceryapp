@@ -8,9 +8,9 @@ import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
-import 'package:hack_grocery_app/screens/create_group.dart';
-import 'package:hack_grocery_app/screens/join_group.dart';
-import 'package:hack_grocery_app/screens/individual_group_screen.dart';
+import 'package:hack_grocery_app/screens/group_related/create_group.dart';
+import 'package:hack_grocery_app/screens/group_related/join_group.dart';
+import 'package:hack_grocery_app/screens/group_related/individual_group_screen.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
 
 var list1 = Lists(color:'ff95b1de', id: '', name: 'Test1', imgUrl: '', items: []);

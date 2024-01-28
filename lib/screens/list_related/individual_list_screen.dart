@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
-import 'package:hack_grocery_app/screens/create_list_screen.dart';
+import 'package:hack_grocery_app/screens/list_related/create_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
