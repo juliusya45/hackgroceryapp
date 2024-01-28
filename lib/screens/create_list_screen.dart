@@ -9,7 +9,10 @@ import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 
 class CreateList extends StatefulWidget {
-  const CreateList({super.key});
+  const CreateList({super.key, required this.appUser, required this.group});
+
+  final AppUser appUser;
+  final Group group;
 
   @override
   State<CreateList> createState() => _CreateListState();
@@ -36,7 +39,7 @@ class _CreateListState extends State<CreateList> {
     //add the list to the group
     //what's actually happening is that I add the list to the group
     group.addList(docRef.id);
-    final groupRef = db.collection("users").withConverter(
+    final groupRef = db.collection("group").withConverter(
       fromFirestore: Group.fromFirestore, toFirestore: (Group group, option) => group.toFirestore()
       ).doc(FirebaseAuth.instance.currentUser!.uid);
     await groupRef.set(group);
@@ -69,7 +72,7 @@ class _CreateListState extends State<CreateList> {
       ),
         ElevatedButton(
         onPressed : () {
-          var list = Lists(color: 'c77069', name: _listNameController.text.trim(), id: '', item: [],);
+          var list = Lists(color: 'c77069', name: _listNameController.text.trim(), id: '', items: [],);
           createGroup(list, group);
         },
         child: Text('Create!'),
