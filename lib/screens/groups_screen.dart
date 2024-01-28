@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
+import 'package:hack_grocery_app/classes/group.dart';
 
-
+var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -45,18 +47,16 @@ class _GroupScreenState extends State<GroupScreen> {
         ),
       ],  
     ),
-      body:Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
+      body:
+      ListView(
+        padding: const EdgeInsets.all(8.0),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          )
+        ]
+      ),
   floatingActionButton: const FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
               onPressed: (null),
