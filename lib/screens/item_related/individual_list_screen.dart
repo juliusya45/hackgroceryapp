@@ -6,6 +6,7 @@ import 'package:hack_grocery_app/classes/item.dart';
 import 'package:hack_grocery_app/classes/item_card.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
 import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/screens/group_related/group_setting_screen.dart';
 import 'package:hack_grocery_app/screens/item_related/create_item_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
@@ -104,7 +105,14 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
       Padding(
       padding: EdgeInsets.only(right: 20.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () async {
+          await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group, appUser: widget.appUser,)));
+              Future.delayed(const Duration(seconds: 1), () {
+                setState(() {
+                  refresh();
+                  });
+                  });
+        },
         child: Icon(
             Icons.more_vert
             ),
