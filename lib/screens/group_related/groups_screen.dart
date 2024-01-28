@@ -76,6 +76,8 @@ class _GroupScreenState extends State<GroupScreen> {
           print("getting groups!");
           final groups = doc.data();
           print(doc.id);
+          //add id to group:
+          groups.id = doc.id;
           print(appUser.groups.contains(doc.id));
           if(groups != null && appUser.groups.contains(doc.id))
           {

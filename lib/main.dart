@@ -16,7 +16,7 @@ import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:hack_grocery_app/screens/group_related/individual_group_screen.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
-import 'package:hack_grocery_app/screens/list_related/individual_list_screen.dart';
+import 'package:hack_grocery_app/screens/item_related/individual_list_screen.dart';
 import 'package:hack_grocery_app/classes/list_card.dart';
 
 
