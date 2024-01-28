@@ -9,9 +9,8 @@ import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 
 class CreateList extends StatefulWidget {
-  const CreateList({super.key, required this.appUser, required this.group});
+  const CreateList({super.key, required this.group});
 
-  final AppUser appUser;
   final Group group;
 
   @override
@@ -27,21 +26,22 @@ class _CreateListState extends State<CreateList> {
     //add the list to the database:
     final db = FirebaseFirestore.instance;
     final docRef = db
-    .collection("lists")
+    .collection("list")
     .withConverter(
       fromFirestore: Lists.fromFirestore,
       toFirestore: (Lists list, option) => list.toFirestore(),
     )
     .doc();
     //this method actually adds the list
+    //setting the document to be equal to the list
     await docRef.set(list);
 
     //add the list to the group
     //what's actually happening is that I add the list to the group
     group.addList(docRef.id);
-    final groupRef = db.collection("group").withConverter(
+    final groupRef = db.collection("groups").withConverter(
       fromFirestore: Group.fromFirestore, toFirestore: (Group group, option) => group.toFirestore()
-      ).doc(FirebaseAuth.instance.currentUser!.uid);
+      ).doc(group.id);
     await groupRef.set(group);
 
   }
@@ -72,8 +72,11 @@ class _CreateListState extends State<CreateList> {
       ),
         ElevatedButton(
         onPressed : () {
+          //default color for now
           var list = Lists(color: 'ff49ad6a', name: _listNameController.text.trim(), id: '', items: [],);
           createList(list, group);
+          print('list created');
+          Navigator.pop(context);
         },
         child: Text('Create!'),
           ),

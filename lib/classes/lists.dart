@@ -37,7 +37,7 @@ class Lists
     return {
       'name': name,
       'color': color,
-      'item': items,
+      'items': items,
       'imgUrl' : imgUrl
     };
   }
