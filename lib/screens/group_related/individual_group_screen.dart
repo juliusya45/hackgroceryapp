@@ -29,8 +29,9 @@ class NavigationBarApp extends StatelessWidget {
 }
 
 class IndividualGroupScreen extends StatefulWidget {
-  const IndividualGroupScreen({super.key, required this.listsList, required this.group});
+  const IndividualGroupScreen({super.key, required this.listsList, required this.group, required this.appUser});
 
+  final AppUser appUser;
   final Group group;
   final List<Lists> listsList;
 
@@ -109,7 +110,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
       padding: EdgeInsets.only(right: 20.0),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group,)));
+          await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group, appUser: widget.appUser,)));
               Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
