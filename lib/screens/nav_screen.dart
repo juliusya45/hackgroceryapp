@@ -5,6 +5,8 @@ import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/group_related/groups_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
+import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
+
 
 class Nav extends StatefulWidget{
   const Nav({super.key, required this.groupsList, required this.appUser});
