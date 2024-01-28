@@ -19,62 +19,57 @@ class Nav extends StatefulWidget{
 
 class _NavState extends State<Nav> {
   int currentPageIndex = 0;
+  PersistentTabController _controller = PersistentTabController(initialIndex: 0);
   
   
-@override
-  Widget build(BuildContext context) {
+// @override
+//   Widget build(BuildContext context) {
+//     final groupsList = widget.groupsList;
+//     final appUser = widget.appUser;
+
+
+//     final ThemeData theme = Theme.of(context);
+//     return Scaffold(
+//       bottomNavigationBar: NavigationBar(
+//         onDestinationSelected: (int index) {
+//           setState(() {
+//             currentPageIndex = index;
+//           });
+//         },
+//         indicatorColor: Colors.lightGreen,
+//         selectedIndex: currentPageIndex,
+//         destinations: const <Widget>[
+//           NavigationDestination(
+//             selectedIcon: Icon(Icons.group_sharp),
+//             icon: Icon(Icons.group_outlined),
+//             label: 'Groups',
+//           ),
+//           NavigationDestination(
+//             icon: Badge(child: Icon(Icons.notifications_sharp)),
+//             label: 'Notifications',
+//           ),
+//           NavigationDestination(
+//             icon: Icon(Icons.logout_sharp),
+//             label: 'Log Out',
+//           ),
+//         ],
+//       ),
+//       body: <Widget>[
+//         /// Home page
+//         GroupScreen(groupsList: groupsList, appUser: appUser,),
+
+//         /// Notifications page
+//         NotificationScreen(),
+
+//         /// Settings page
+//         SettingScreen()
+//       ][currentPageIndex],
+//     );
+//   }
+
+Widget build(BuildContext context) {
     final groupsList = widget.groupsList;
     final appUser = widget.appUser;
-
-
-    final ThemeData theme = Theme.of(context);
-    return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: Colors.lightGreen,
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.group_sharp),
-            icon: Icon(Icons.group_outlined),
-            label: 'Groups',
-          ),
-          NavigationDestination(
-            icon: Badge(child: Icon(Icons.notifications_sharp)),
-            label: 'Notifications',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.logout_sharp),
-            label: 'Log Out',
-          ),
-        ],
-      ),
-      body: <Widget>[
-        /// Home page
-        GroupScreen(groupsList: groupsList, appUser: appUser,),
-
-        /// Notifications page
-        NotificationScreen(),
-
-        /// Settings page
-        SettingScreen()
-      ][currentPageIndex],
-    );
-  }
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.groupsList, required this.appUser});
-  final List<Group> groupsList;
-  final AppUser appUser;
-  @override   
-  Widget build(BuildContext context) {
-    groupsList = widget.groupsList;
-    appUser = widget.appUser;
     return PersistentTabView(
         context,
         controller: _controller,
@@ -87,8 +82,9 @@ class MyApp extends StatelessWidget {
         stateManagement: true, // Default is true.
         hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
         decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          colorBehindNavBar: Colors.white,
+          //borderRadius: BorderRadius.circular(10.0),
+          border: BoxBorder(),
+          colorBehindNavBar: Colors.grey,
         ),
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
@@ -104,11 +100,37 @@ class MyApp extends StatelessWidget {
         navBarStyle: NavBarStyle.style1, // Choose the nav bar style with this property.
     );
   }
-  
-}
+
   List<Widget> _buildScreens() {
         return [
-          GroupScreen(),
-          SettingsScreen()
+          GroupScreen(groupsList: widget.groupsList,appUser: widget.appUser,),
+          NotificationScreen(),
+          SettingScreen(),
+
         ];
     }
+
+List<PersistentBottomNavBarItem> _navBarsItems() {
+      return [
+           PersistentBottomNavBarItem(
+              icon: Icon(Icons.groups),
+              title: ("Groups"),
+              activeColorPrimary: Colors.green,
+              inactiveColorPrimary: Colors.grey,
+            ),
+            PersistentBottomNavBarItem(
+              icon: Icon(Icons.notifications),
+              title: ("Notifications"),
+              activeColorPrimary: Colors.green,
+              inactiveColorPrimary: Colors.grey,
+            ),
+            PersistentBottomNavBarItem(
+            icon: Icon(Icons.logout),
+            title: ("Logout"),
+            activeColorPrimary: Colors.green,
+              inactiveColorPrimary: Colors.grey,
+            ),
+        ];
+    }   
+}   
+  
