@@ -65,6 +65,7 @@ class MainApp extends StatelessWidget {
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
         '/list_screen': (context) => IndividualGroupScreen(listsList: listsList, group: emptyGroup,),
         '/group_setting_screen': (context) => GroupSettingScreen(group: emptyGroup,),
+        '/item_screen' : (context) => IndividualListScreen(list: list1)
       },
     );
   }

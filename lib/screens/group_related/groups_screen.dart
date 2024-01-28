@@ -210,7 +210,7 @@ class _GroupScreenState extends State<GroupScreen> {
             icon: const Icon(Icons.group_add),
             onPressed: ()
               async {
-              await Navigator.push(context, MaterialPageRoute(builder: (context)=> JoinGroup()));
+              await Navigator.push(context, MaterialPageRoute(builder: (context)=> JoinGroup(appUser: appUser,)));
               Future.delayed(const Duration(seconds: 2), () {
                 setState(() {
                   refresh();
