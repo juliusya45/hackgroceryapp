@@ -141,7 +141,7 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
               onPressed: () async {
               //when the add item button is created go to the screen to add an item
               await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateItem(list: list,)));
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
                 });
