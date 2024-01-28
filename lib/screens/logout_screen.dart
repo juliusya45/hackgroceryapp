@@ -38,15 +38,6 @@ class _SettingScreenState extends State<SettingScreen> {
             fontSize: 28,
             ),
         ),
-         actions: [
-          IconButton(
-              icon: const Icon(Icons.lightbulb),
-              onPressed: () {
-                Get.isDarkMode
-                    ? Get.changeTheme(ThemeData.light())
-                    : Get.changeTheme(ThemeData.dark());
-              })
-        ],
         centerTitle: true,
       ),
       body: ListView(
