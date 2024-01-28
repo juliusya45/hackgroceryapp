@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: "Enter your email"
                     ),
-                    obscureText: true,
+                    obscureText: false,
                   ),
                 ),
 
@@ -114,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: "Password",
                     ),
+                    obscureText: true,
                   ),
                 ),
 

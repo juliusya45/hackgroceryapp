@@ -1,12 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
 import 'package:hack_grocery_app/screens/authentication/verification_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 
 class InitialScreen extends StatefulWidget {
-  const InitialScreen({super.key});
+  const InitialScreen({super.key, required this.groupsList, required this.appUser});
+
+  final List<Group> groupsList;
+  final AppUser appUser;
 
   @override
   State<InitialScreen> createState() => __InitialScreenState();
@@ -29,7 +34,7 @@ class __InitialScreenState extends State<InitialScreen> {
                 print('to home screen');
               }
               //if the user successfully signed in we show a loading spinner and do everything else
-              return const LoadingHome();
+              return LoadingHome(groupsList: widget.groupsList, appUser: widget.appUser,);
             }
             //if the user has not been verified
             else

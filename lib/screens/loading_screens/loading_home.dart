@@ -10,7 +10,10 @@ import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingHome extends StatefulWidget {
-  const LoadingHome({super.key});
+  const LoadingHome({super.key, required this.groupsList, required this.appUser});
+
+  final List<Group> groupsList;
+  final AppUser appUser;
 
   @override
   State<LoadingHome> createState() => _LoadingHomeState();
@@ -73,7 +76,7 @@ class _LoadingHomeState extends State<LoadingHome> {
           Navigator.pushReplacement(context,
            MaterialPageRoute(
             settings: const RouteSettings(name: '/nav'),
-            builder: (context) => Nav()
+            builder: (context) => Nav(groupsList: widget.groupsList, appUser: widget.appUser,)
             ),
            );
         }

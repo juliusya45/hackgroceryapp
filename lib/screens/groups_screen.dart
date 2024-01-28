@@ -23,9 +23,6 @@ class NextPage extends StatelessWidget {
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
-var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
-var emptyGroup2 = Group(color: 'ff42e6f5', id: '', name: 'Tests2', imgUrl: '');
-
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -33,13 +30,15 @@ class NavigationBarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const GroupScreen(),
+      home: const GroupScreen(groupsList: [],),
     );
   }
 }
 
 class GroupScreen extends StatefulWidget {
-  const GroupScreen({super.key});
+  const GroupScreen({super.key, required this.groupsList});
+
+  final List<Group> groupsList;
 
   @override
   State<GroupScreen> createState() => _GroupScreenState();
@@ -50,6 +49,9 @@ class _GroupScreenState extends State<GroupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //this is a list of group objects
+    List<Group> groupsList = widget.groupsList;
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -70,42 +72,24 @@ class _GroupScreenState extends State<GroupScreen> {
       ],  
     ),
       body:
-      ListView(
-        padding: const EdgeInsets.all(8.0),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup2),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup2),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
-          )
-        ]
+      ListView.builder
+      (
+        itemCount: groupsList.length,
+        itemBuilder: (context, index)
+        {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+            child: Card(
+              elevation: 3,
+              child: InkWell(
+                onTap: () {
+                  //function to view the corresponding group
+                },
+                child: GroupCard(groupItem: groupsList[index]),
+              ),
+            ),
+            );
+        }
       ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
