@@ -73,7 +73,7 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
         ElevatedButton(
         onPressed : () {
-          var group = Group(color: 'c77069', name: _groupNameController.text.trim(), id: '', lists: [],);
+          var group = Group(color: 'ffc77069', name: _groupNameController.text.trim(), id: '', lists: [],);
           createGroup(group, appUser);
           //after creating the group go back to the groups screen:
           Navigator.pop(context);

@@ -72,7 +72,7 @@ class _CreateListState extends State<CreateList> {
       ),
         ElevatedButton(
         onPressed : () {
-          var list = Lists(color: 'c77069', name: _listNameController.text.trim(), id: '', items: [],);
+          var list = Lists(color: 'ff49ad6a', name: _listNameController.text.trim(), id: '', items: [],);
           createList(list, group);
         },
         child: Text('Create!'),
