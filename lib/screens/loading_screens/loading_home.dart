@@ -66,6 +66,12 @@ class _LoadingHomeState extends State<LoadingHome> {
     },
     onError: (e) => print(e)
     );
+    Navigator.pushReplacement(context,
+           MaterialPageRoute(
+            settings: const RouteSettings(name: '/nav'),
+            builder: (context) => Nav(groupsList: allGroups, appUser: sendUser,)
+            ),
+           );
   }
 
   @override

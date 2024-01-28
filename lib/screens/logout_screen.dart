@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
+import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
 
 
 class NavigationBarApp extends StatelessWidget {
@@ -39,6 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppUser emptyUser = AppUser(uid: '', username: '', email: '', groups: []);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -77,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
                         Animation secondaryAnimation) {
                           //switch to Authpage?
-                      return const AuthScreen();
+                      return InitialScreen(groupsList: [], appUser: emptyUser,);
                     },
                     transitionsBuilder: (BuildContext context,
                         Animation<double> animation,
@@ -91,7 +94,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         child: child,
                       );
                     }),
-                    (route) => false
+                    (route) => true
                     );
                 },
               )
