@@ -45,6 +45,7 @@ class _CreateListState extends State<CreateList> {
 
   @override
   Widget build(BuildContext context) {
+    final Group group = widget.group;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +68,10 @@ class _CreateListState extends State<CreateList> {
         ),
       ),
         ElevatedButton(
-        onPressed : () {},
+        onPressed : () {
+          var list = Lists(color: 'c77069', name: _listNameController.text.trim(), id: '',);
+          createGroup(list, group);
+        },
         child: Text('Create!'),
           ),
          ],
