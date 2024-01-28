@@ -44,7 +44,7 @@ class MainApp extends StatelessWidget {
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => const InitialScreen(),
-        '/groups': (context) => const GroupScreen(),
+        '/nav': (context) => const Nav(),
         '/verification': (context) => const VerificationScreen(),
         '/loading_home': (context) => const LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
