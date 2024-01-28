@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
 
@@ -40,7 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
         centerTitle: true,
       ),
       body: ListView(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             children: [
               ElevatedButton(
                 child: const Text('Log Out'),

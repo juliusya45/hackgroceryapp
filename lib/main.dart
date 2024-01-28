@@ -42,7 +42,8 @@ class MainApp extends StatelessWidget {
     var group2 = Group(color: 'ff95b25a', id: '', name: 'Test3', imgUrl: '');
     var group3 = Group(color: 'ff9502bc', id: '', name: 'Test4', imgUrl: '');
 
-    List<Group> groupsList = [emptyGroup, group1, group2, group3];
+    //List<Group> groupsList = [emptyGroup, group1, group2, group3];
+    List<Group> groupsList = [];
 
     var list1 = Lists(color:'ff95b1de', id: '', name: 'Test1', imgUrl: '');
     var list2 = Lists(color:'ff1531ae', id: '', name: 'Test2', imgUrl: '');
@@ -58,7 +59,7 @@ class MainApp extends StatelessWidget {
         '/nav': (context) => Nav(groupsList: groupsList, appUser: emptyUser,),
         '/verification': (context) => VerificationScreen(),
         '/group_screen': (context) => GroupScreen(groupsList: groupsList,),
-        '/loading_home': (context) => LoadingHome(groupsList: groupsList, appUser: emptyUser,),
+        '/loading_home': (context) => LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
         '/list_screen': (context) => IndividualGroupScreen(listsList: listsList,),
       },

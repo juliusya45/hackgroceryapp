@@ -34,7 +34,7 @@ class __InitialScreenState extends State<InitialScreen> {
                 print('to home screen');
               }
               //if the user successfully signed in we show a loading spinner and do everything else
-              return LoadingHome(groupsList: widget.groupsList, appUser: widget.appUser,);
+              return LoadingHome();
             }
             //if the user has not been verified
             else
