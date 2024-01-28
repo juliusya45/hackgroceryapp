@@ -95,8 +95,8 @@ class _GroupScreenState extends State<GroupScreen> {
         key: _key,
         // duration: const Duration(milliseconds: 500),
         // distance: 200.0,
-        // type: ExpandableFabType.up,
-        // pos: ExpandableFabPos.left,
+        type: ExpandableFabType.up,
+        //pos: ExpandableFabPos.left,
         // childrenOffset: const Offset(0, 20),
         // fanAngle: 40,
         // openButtonBuilder: RotateFloatingActionButtonBuilder(
