@@ -75,6 +75,8 @@ class _CreateGroupState extends State<CreateGroup> {
         onPressed : () {
           var group = Group(color: 'c77069', name: _groupNameController.text.trim(), id: '', lists: [],);
           createGroup(group, appUser);
+          //after creating the group go back to the groups screen:
+          Navigator.pop(context);
         },
         child: Text('Create!'),
           ),

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group_card.dart';
@@ -34,16 +38,63 @@ class GroupScreen extends StatefulWidget {
 
   @override
   State<GroupScreen> createState() => _GroupScreenState();
+
+  
 }
 
 class _GroupScreenState extends State<GroupScreen> {
   final _key = GlobalKey<ExpandableFabState>();
+
+  
 
   @override
   Widget build(BuildContext context) {
     //this is a list of group objects
     List<Group> groupsList = widget.groupsList;
     AppUser appUser = widget.appUser;
+
+    //refresh method to all user to refresh page:
+    Future<void> refresh() async
+    {
+      //!!ALL OF THIS IS SAME AS IN LOADING_HOME!!
+      //first remove everything currently in the list
+      groupsList.removeRange(0, groupsList.length);
+      var database = FirebaseFirestore.instance;
+        //create a reference to the db:
+        //defining the reference to our database:
+      final groupRef = database.collection('groups').withConverter(
+      fromFirestore:  Group.fromFirestore,
+      toFirestore: (Group groups, _) => groups.toFirestore(),
+      );
+      //once data populates from the database fill the list
+      //of groups with groups that the user can access
+      await groupRef.get().then((querySnapshot)
+      {
+        print("start getting groups");
+        for(var doc in querySnapshot.docs)
+        {
+          print("getting groups!");
+          final groups = doc.data();
+          print(doc.id);
+          print(appUser.groups.contains(doc.id));
+          if(groups != null && appUser.groups.contains(doc.id))
+          {
+              //giving the groups object an id since it was left out originally
+              groups.id = doc.id;
+              print(groups.id);
+              groupsList.add(groups);
+          }
+        }
+      },
+      onError: (e) => print(e)
+      );
+      setState(() {
+        
+      });
+    }
+
+    Timer? refreshTime;
+    
 
     final ThemeData theme = Theme.of(context);
     return Scaffold(
@@ -65,25 +116,28 @@ class _GroupScreenState extends State<GroupScreen> {
       // ],  
     ),
       body:
-      ListView.builder
-      (
-        itemCount: groupsList.length,
-        itemBuilder: (context, index)
-        {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-            child: Card(
-              elevation: 3,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: listsList,))));
-                },
-                child: GroupCard(groupItem: groupsList[index]),
+      RefreshIndicator(
+        onRefresh: refresh,
+        child: ListView.builder
+        (
+          itemCount: groupsList.length,
+          itemBuilder: (context, index)
+          {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+              child: Card(
+                elevation: 3,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: listsList,))));
+                  },
+                  child: GroupCard(groupItem: groupsList[index]),
+                ),
               ),
-            ),
-            );
-        }
+              );
+          }
+        ),
       ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
@@ -138,10 +192,14 @@ class _GroupScreenState extends State<GroupScreen> {
             tooltip: "Create Group",
             label: const Text('Create Group'),
             mouseCursor: MaterialStateMouseCursor.textable,
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => CreateGroup(appUser: appUser,))));
-            },
+            onPressed: ()  async {
+              await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateGroup(appUser: appUser)));
+              Future.delayed(const Duration(seconds: 2), () {
+                setState(() {
+                  refresh();
+                });
+              });
+            }
           ),
           FloatingActionButton.extended(
             // shape: const CircleBorder(),
@@ -151,8 +209,8 @@ class _GroupScreenState extends State<GroupScreen> {
             label: const Text('Add Group'),
             icon: const Icon(Icons.group_add),
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => const JoinGroup())));
+              //Navigator.of(context).push(MaterialPageRoute (builder: ((context) => const JoinGroup())));
+              const JoinGroup();
             },
           ),
         ],
