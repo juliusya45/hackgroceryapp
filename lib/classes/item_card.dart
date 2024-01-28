@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'item.dart';
 
-class ItemCard extends StatelessWidget{
-  ItemCard({
+class ItemCard extends StatefulWidget{
+  const ItemCard({
     super.key,
     required this.itemInst,
   });
-  bool checkVal = false;
-  late ValueChanged<bool> onChanged;
   final Item itemInst;
 
   @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
+  bool checkVal = false;
+
+  @override
   Widget build(BuildContext context) {
+    final Item itemInst = widget.itemInst;
     return InkWell(
       onTap: () {
-        onChanged(!checkVal);
+        //Bring up description
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -25,7 +31,9 @@ class ItemCard extends StatelessWidget{
           children: <Widget>[
             Checkbox(value: checkVal, 
             onChanged: (bool? newValue){
-              onChanged(newValue!);
+              setState(() {
+                checkVal = newValue!;
+              });
             },),
             Expanded(child: Text(
               itemInst.name,
