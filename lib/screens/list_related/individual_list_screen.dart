@@ -56,7 +56,6 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
         ),
       ],  
     ),
-      bottomNavigationBar: Nav(groupsList: widget.groupsList, appUser: widget.appUser),
       body: Card(
       child: InkWell(
       onTap: () {},
