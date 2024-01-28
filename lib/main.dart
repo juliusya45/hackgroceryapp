@@ -13,7 +13,7 @@ import 'package:hack_grocery_app/screens/groups_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
-import 'package:hack_grocery_app/screens/main_setting_screen.dart';
+import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/screens/groups_screen.dart';
-import 'package:hack_grocery_app/screens/main_setting_screen.dart';
+import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
 class Nav extends StatefulWidget{
