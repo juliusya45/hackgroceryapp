@@ -75,7 +75,7 @@ class _GroupScreenState extends State<GroupScreen> {
           ),
           Container(
             padding: const EdgeInsets.all(4.0),
-            child: GroupCard(groupItem: emptyGroup),
+            child: GroupCard(groupItem: emptyGroup2),
           ),
           Container(
             padding: const EdgeInsets.all(4.0),
