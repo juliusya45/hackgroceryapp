@@ -7,6 +7,7 @@ import 'package:hack_grocery_app/firebase_options.dart';
 import 'package:hack_grocery_app/screens/authentication/login_screen.dart';
 import 'package:hack_grocery_app/screens/authentication/signup_screen.dart';
 import 'package:hack_grocery_app/screens/authentication/verification_screen.dart';
+import 'package:hack_grocery_app/screens/group_setting_screen.dart';
 import 'package:hack_grocery_app/screens/groups_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/initial_screen.dart';
 import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
@@ -52,7 +53,7 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/list_screen',
+      initialRoute: '/group_setting_screen',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => InitialScreen(groupsList: groupsList, appUser: emptyUser,),
@@ -62,6 +63,7 @@ class MainApp extends StatelessWidget {
         '/loading_home': (context) => LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
         '/list_screen': (context) => IndividualGroupScreen(listsList: listsList,),
+        '/group_setting_screen': (context) => GroupSettingScreen(),
       },
     );
   }
