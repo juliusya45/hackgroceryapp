@@ -5,26 +5,41 @@ import 'item.dart';
 class ItemCard extends StatelessWidget{
   const ItemCard({
     super.key,
-    required this.itemInst
+    required this.itemInst,
+    required this.checkVal,
+    required this.onChanged,
   });
-
+  final bool checkVal;
+  final ValueChanged<bool> onChanged;
   final Item itemInst;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      width: double.infinity,
-      height: 100.0,
-      alignment: Alignment.center,
-      child: Text(
-        itemInst.name,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold
-        ),
-       ),
+    return InkWell(
+      onTap: () {
+        onChanged(!checkVal);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        width: double.infinity,
+        height: 70.0,
+        child: Row(
+          children: <Widget>[
+            Checkbox(value: checkVal, 
+            onChanged: (bool? newValue){
+              onChanged(newValue!);
+            },),
+            Expanded(child: Text(
+              itemInst.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+              )
+            ))
+          ]
+          )
+      )
     );
   }
 }
