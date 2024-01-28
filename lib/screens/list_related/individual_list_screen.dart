@@ -27,7 +27,7 @@ class IndividualListScreen extends StatefulWidget {
   const IndividualListScreen({super.key, required this.groupsList, required this.appUser});
   final List<Group> groupsList;
   final AppUser appUser;
-
+  
   @override
   State<IndividualListScreen> createState() => _IndividualListScreenState();
 }

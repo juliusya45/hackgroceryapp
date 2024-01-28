@@ -16,6 +16,7 @@ import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:hack_grocery_app/screens/group_related/individual_group_screen.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
+import 'package:hack_grocery_app/screens/list_related/individual_list_screen.dart';
 import 'package:hack_grocery_app/classes/list_card.dart';
 
 
@@ -53,7 +54,7 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/list_screen',
+      initialRoute: '/item_screen',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => InitialScreen(groupsList: groupsList, appUser: emptyUser,),
@@ -64,6 +65,8 @@ class MainApp extends StatelessWidget {
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
         '/list_screen': (context) => IndividualGroupScreen(listsList: listsList, group: emptyGroup,),
         '/group_setting_screen': (context) => GroupSettingScreen(),
+        '/item_screen': (context) => IndividualListScreen(groupsList: groupsList, appUser: emptyUser,),
+
       },
     );
   }
