@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/sockets/src/socket_notifier.dart';
 
 import 'item.dart';
 
-class ItemCard extends StatelessWidget{
-  ItemCard({
+class ItemCard extends StatefulWidget{
+  const ItemCard({
     super.key,
     required this.itemInst,
   });
-  bool checkVal = false;
-  late ValueChanged<bool> onChanged;
   final Item itemInst;
 
   @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
+  bool checkVal = false;
+
+  @override
   Widget build(BuildContext context) {
+    final Item itemInst = widget.itemInst;
     return InkWell(
       onTap: () {
-        onChanged(!checkVal);
+        openDescription(itemInst);
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -25,7 +32,9 @@ class ItemCard extends StatelessWidget{
           children: <Widget>[
             Checkbox(value: checkVal, 
             onChanged: (bool? newValue){
-              onChanged(newValue!);
+              setState(() {
+                checkVal = newValue!;
+              });
             },),
             Expanded(child: Text(
               itemInst.name,
@@ -40,4 +49,14 @@ class ItemCard extends StatelessWidget{
       )
     );
   }
+
+  Future openDescription(Item itemInst) => showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      content: Text(itemInst.description),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: Text("Close"))
+      ],
+    )
+  );
 }

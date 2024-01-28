@@ -18,6 +18,7 @@ class InitialScreen extends StatefulWidget {
 }
 
 class __InitialScreenState extends State<InitialScreen> {
+  
   final user = FirebaseAuth.instance.currentUser;
 
   @override
