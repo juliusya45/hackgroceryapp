@@ -11,9 +11,8 @@ import 'package:hack_grocery_app/classes/item.dart';
 
 
 class CreateItem extends StatefulWidget {
-  const CreateItem({super.key, required this.appUser, required this.list});
+  const CreateItem({super.key, required this.list});
 
-  final AppUser appUser;
   final Lists list;
 
   @override
