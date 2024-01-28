@@ -17,7 +17,7 @@ class ListCard extends StatelessWidget{
         borderRadius: BorderRadius.circular(20.0),
         child: Container(
             padding: const EdgeInsets.all(8.0),
-            color: Color(hexToInteger(listItem.color)),
+            color: Color(hexToInteger('ff49ad6a')),
             width: 200,
             height: 100,
             alignment: Alignment.center,
