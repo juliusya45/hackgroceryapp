@@ -28,6 +28,23 @@ class _GroupScreenState extends State<GroupScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
+      appBar: AppBar(
+      backgroundColor: Colors.green,
+      title: Text('Groups'),
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      actions: <Widget>[
+      Padding(
+      padding: EdgeInsets.only(right: 20.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Icon(
+            Icons.more_vert
+            ),
+          )
+        ),
+      ],  
+    ),
       body:Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
