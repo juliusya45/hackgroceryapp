@@ -84,34 +84,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         ),
         body: Column(
           children: [
-            //Button to sign out if the user wants to do that
-            ElevatedButton(
-              child: Text("Sign Out"),
-              onPressed:() {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushAndRemoveUntil(
-                        context,
-                        PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                            Animation secondaryAnimation) {
-                              //switch to Authpage?
-                          return const AuthScreen();
-                        },
-                        transitionsBuilder: (BuildContext context,
-                            Animation<double> animation,
-                            Animation<double> secondaryAnimation,
-                            Widget child) {
-                          return SlideTransition(
-                            position: Tween<Offset>(
-                              begin: const Offset(1.0, 0.0),
-                              end: Offset.zero,
-                            ).animate(animation),
-                            child: child,
-                          );
-                        }),
-                        (route) => false
-                        );
-              },
-              ),
+            
               //Everythng else below here is to handle user verification:
               const SizedBox(height: 80),
             Text('A verification email was sent to ${FirebaseAuth.instance.currentUser?.email}',
@@ -172,6 +145,34 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 },
               ),
             ),
+            //Button to sign out if the user wants to do that
+            ElevatedButton(
+              child: Text("Sign Out"),
+              onPressed:() {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushAndRemoveUntil(
+                        context,
+                        PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                            Animation secondaryAnimation) {
+                              //switch to Authpage?
+                          return const AuthScreen();
+                        },
+                        transitionsBuilder: (BuildContext context,
+                            Animation<double> animation,
+                            Animation<double> secondaryAnimation,
+                            Widget child) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                              begin: const Offset(1.0, 0.0),
+                              end: Offset.zero,
+                            ).animate(animation),
+                            child: child,
+                          );
+                        }),
+                        (route) => false
+                        );
+              },
+              ),
           ],
         ),
     );
