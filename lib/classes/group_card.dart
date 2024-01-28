@@ -3,15 +3,6 @@ import 'package:hack_grocery_app/classes/lists.dart';
 
 import 'group.dart';
 
-void viewListing(int index)
-{
-  Navigator.push(
-  context, MaterialPageRoute(
-      settings: const RouteSettings(name: '/listing'),
-      builder: (context) => ListingScreen(listingItem: allListings[index], zotuser: zotuser,)
-      )
-  );
-}
 
 class GroupCard extends StatelessWidget{
   const GroupCard({

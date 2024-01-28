@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:hack_grocery_app/classes/group.dart';
 
 class NextPage extends StatelessWidget {
   const NextPage({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class NextPage extends StatelessWidget {
 }
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-import 'package:hack_grocery_app/classes/group.dart';
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
