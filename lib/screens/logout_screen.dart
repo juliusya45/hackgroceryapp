@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hack_grocery_app/screens/authentication/auth_page.dart';
+
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -24,50 +27,53 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body:
-        /// Messages page
-        ListView.builder(
-          reverse: true,
-          itemCount: 2,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    'Hello',
-                    style: theme.textTheme.bodyLarge!
-                        .copyWith(color: theme.colorScheme.onPrimary),
-                  ),
-                ),
-              );
-            }
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                margin: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  'Hi!',
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: theme.colorScheme.onPrimary),
-                ),
-              ),
-            );
-          },
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: const Text(
+          'Log Out',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+            ),
         ),
+        centerTitle: true,
+      ),
+      body: ListView(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            children: [
+              ElevatedButton(
+                child: const Text('Log Out'),
+                onPressed: () {
+                  //signs user out
+                  FirebaseAuth.instance.signOut();
+                  //Animation that puts the user back onto the login screen
+                  //from: https://stackoverflow.com/questions/55586189/flutter-log-out-replace-stack-beautifully
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation) {
+                          //switch to Authpage?
+                      return const AuthScreen();
+                    },
+                    transitionsBuilder: (BuildContext context,
+                        Animation<double> animation,
+                        Animation<double> secondaryAnimation,
+                        Widget child) {
+                      return SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(1.0, 0.0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      );
+                    }),
+                    (route) => false
+                    );
+                },
+              )
+            ],
+          ),
     );
   }
 }
