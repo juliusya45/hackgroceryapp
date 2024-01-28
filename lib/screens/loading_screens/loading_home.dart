@@ -91,9 +91,7 @@ class _LoadingHomeState extends State<LoadingHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Loading Home"),
-      ),
+      
       body: Center(
         child: Column(
         

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/lists.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
@@ -71,7 +73,7 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
         ElevatedButton(
         onPressed : () {
-          var group = Group(color: 'c77069', name: _groupNameController.text.trim(), id: '',);
+          var group = Group(color: 'c77069', name: _groupNameController.text.trim(), id: '', lists: [],);
           createGroup(group, appUser);
           //after creating the group go back to the groups screen:
           Navigator.pop(context);
