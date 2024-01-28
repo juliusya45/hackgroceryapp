@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hack_grocery_app/classes/item.dart';
+
 
 class Lists
 {
   late String id;
   late String name;
   late String color;
+  late List items;
   late String imgUrl;
 
 
@@ -12,6 +15,7 @@ class Lists
     required this.id,
     required this.name,
     required this.color,
+    required this.items,
     this.imgUrl = ""
     });
 
@@ -23,6 +27,7 @@ class Lists
       id: '',
       name: data!['name'],
       color: data!['color'],
+      items: data!['items'],
       imgUrl: data!['imgUrl']
     );
   }
@@ -32,7 +37,13 @@ class Lists
     return {
       'name': name,
       'color': color,
+      'item': items,
       'imgUrl' : imgUrl
     };
+  }
+
+  addItem(String itemStr)
+  {
+    items.add(itemStr);
   }
 }
