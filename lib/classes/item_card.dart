@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/sockets/src/socket_notifier.dart';
 
 import 'item.dart';
 
@@ -21,7 +22,7 @@ class _ItemCardState extends State<ItemCard> {
     final Item itemInst = widget.itemInst;
     return InkWell(
       onTap: () {
-        //Bring up description
+        openDescription(itemInst);
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -48,4 +49,14 @@ class _ItemCardState extends State<ItemCard> {
       )
     );
   }
+
+  Future openDescription(Item itemInst) => showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      content: Text(itemInst.description),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: Text("Close"))
+      ],
+    )
+  );
 }
