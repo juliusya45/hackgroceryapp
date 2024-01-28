@@ -56,10 +56,10 @@ class _NavState extends State<Nav> {
         GroupScreen(groupsList: groupsList, appUser: appUser,),
 
         /// Notifications page
-        const NotificationScreen(),
+        NotificationScreen(),
 
         /// Settings page
-        const SettingScreen()
+        SettingScreen()
       ][currentPageIndex],
     );
   }
