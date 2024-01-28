@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/screens/individual_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
+import 'package:hack_grocery_app/classes/list_card.dart';
+import 'package:hack_grocery_app/classes/lists.dart';
+
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
 
 class NavigationBarApp extends StatelessWidget {
@@ -12,13 +16,15 @@ class NavigationBarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const IndividualGroupScreen(),
+      home: const IndividualGroupScreen(listsList: [],),
     );
   }
 }
 
 class IndividualGroupScreen extends StatefulWidget {
-  const IndividualGroupScreen({super.key});
+  const IndividualGroupScreen({super.key, required this.listsList});
+
+  final List<Lists> listsList;
 
   @override
   State<IndividualGroupScreen> createState() => _IndividualGroupScreenState();
@@ -27,11 +33,14 @@ class IndividualGroupScreen extends StatefulWidget {
 class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
   @override
   Widget build(BuildContext context) {
+    //this is a list of lists objects
+    List<Lists> listsList = widget.listsList;
+
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Group Name For Now'),
+      title: Text('Lists'),
       centerTitle: true,
       actions: <Widget>[
       Padding(
@@ -45,36 +54,26 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
         ),
       ],  
     ),
-    body: Card(
-      child: InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: ((context) => const IndividualListScreen())));
-      },
-      child: Container(
-        
-        width: 500.0,
-        height: 150.0,
-    ),
-  ),
-),
-      // body:Card(
-      //     shadowColor: Colors.transparent,
-      //     margin: const EdgeInsets.all(8.0),
-      //     child: InkWell(
-      //       onTap: (){}
-      //     ),
-      //     // child: SizedBox.expand(
-      //       child: Containter(
-
-      //       )
-      //       // child: Center(
-      //         // child: Text(
-      //         //   'Home page',
-      //         //   style: theme.textTheme.titleLarge,
-      //         ),
-            // ),
-        //   ),
-        // ),
+      body:
+      ListView.builder
+      (
+        itemCount: listsList.length,
+        itemBuilder: (context, index)
+        {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+            child: Card(
+              elevation: 3,
+              child: InkWell(
+                onTap: () {
+                  //function to view the corresponding group
+                },
+                child: ListCard(listItem: listsList[index]),
+              ),
+            ),
+            );
+        }
+      ),
   floatingActionButton: const FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
               onPressed: (null),

@@ -10,10 +10,7 @@ import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingHome extends StatefulWidget {
-  const LoadingHome({super.key, required this.groupsList, required this.appUser});
-
-  final List<Group> groupsList;
-  final AppUser appUser;
+  const LoadingHome({super.key});
 
   @override
   State<LoadingHome> createState() => _LoadingHomeState();
@@ -42,26 +39,33 @@ class _LoadingHomeState extends State<LoadingHome> {
 
   Future<void> setup() async{
     //defining the reference to our database:
-    final ref = database.collection('groups').orderBy('time').withConverter(
+    final groupRef = database.collection('groups').withConverter(
     fromFirestore:  Group.fromFirestore,
     toFirestore: (Group groups, _) => groups.toFirestore(),
     );
     await getUserData();
     //once data populates from the database fill the list
     //of groups with groups that the user can access
-    await ref.get().then((event)
+    await groupRef.get().then((querySnapshot)
     {
-      for(var doc in event.docs)
+      print("start getting groups");
+      for(var doc in querySnapshot.docs)
       {
+        print("getting groups!");
         final groups = doc.data();
-        if(groups != null && sendUser.groups.contains(groups.id))
+        print(doc.id);
+        print(sendUser.groups.contains(doc.id));
+        if(groups != null && sendUser.groups.contains(doc.id))
         {
             //giving the groups object an id since it was left out originally
             groups.id = doc.id;
+            print(groups.id);
             allGroups.add(groups);
         }
       }
-    });
+    },
+    onError: (e) => print(e)
+    );
   }
 
   @override
@@ -76,7 +80,7 @@ class _LoadingHomeState extends State<LoadingHome> {
           Navigator.pushReplacement(context,
            MaterialPageRoute(
             settings: const RouteSettings(name: '/nav'),
-            builder: (context) => Nav(groupsList: widget.groupsList, appUser: widget.appUser,)
+            builder: (context) => Nav(groupsList: allGroups, appUser: sendUser,)
             ),
            );
         }

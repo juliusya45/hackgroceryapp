@@ -9,24 +9,27 @@ class ListCard extends StatelessWidget{
     required this.listItem
   });
 
-  final List listItem;
+  final Lists listItem;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      color: Color(hexToInteger(listItem.color)),
-      width: double.infinity,
-      height: 100.0,
-      alignment: Alignment.center,
-      child: Text(
-        listItem.name,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold
-        ),
-       ),
-    );
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: Container(
+            padding: const EdgeInsets.all(8.0),
+            color: Color(hexToInteger(listItem.color)),
+            width: 200,
+            height: 100,
+            alignment: Alignment.center,
+            child: Text(
+                  listItem.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold
+                  ),
+              ),
+            ),
+      );
   }
 }
