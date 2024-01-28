@@ -7,53 +7,55 @@ import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/classes/item.dart';
 
-class CreateList extends StatefulWidget {
-  const CreateList({super.key, required this.appUser, required this.group});
+
+class CreateItem extends StatefulWidget {
+  const CreateItem({super.key, required this.appUser, required this.list});
 
   final AppUser appUser;
-  final Group group;
+  final Lists list;
 
   @override
-  State<CreateList> createState() => _CreateListState();
+  State<CreateItem> createState() => _CreateItemState();
 }
 
-class _CreateListState extends State<CreateList> {
+class _CreateItemState extends State<CreateItem> {
 
   final _listNameController = TextEditingController();
 
-  Future<void> createList(Lists list, Group group) async
+  Future<void> createGroup(Item item, Lists list) async
   {
     //add the list to the database:
     final db = FirebaseFirestore.instance;
     final docRef = db
-    .collection("lists")
+    .collection("items")
     .withConverter(
-      fromFirestore: Lists.fromFirestore,
-      toFirestore: (Lists list, option) => list.toFirestore(),
+      fromFirestore: Item.fromFirestore,
+      toFirestore: (Item item, option) => item.toFirestore(),
     )
     .doc();
     //this method actually adds the list
-    await docRef.set(list);
+    await docRef.set(item);
 
     //add the list to the group
     //what's actually happening is that I add the list to the group
-    group.addList(docRef.id);
-    final groupRef = db.collection("group").withConverter(
-      fromFirestore: Group.fromFirestore, toFirestore: (Group group, option) => group.toFirestore()
+    list.addItem(docRef.id);
+    final listsRef = db.collection("list").withConverter(
+      fromFirestore: Lists.fromFirestore, toFirestore: (Lists list, option) => list.toFirestore()
       ).doc(FirebaseAuth.instance.currentUser!.uid);
-    await groupRef.set(group);
+    await listsRef.set(list);
 
   }
 
   @override
   Widget build(BuildContext context) {
-    final Group group = widget.group;
+    final Lists list = widget.list;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Create New List'),
+      title: Text('Create New Item'),
       centerTitle: true,
   ),
       body: Center(
@@ -66,14 +68,14 @@ class _CreateListState extends State<CreateList> {
             child: TextField(
             controller: _listNameController,
             decoration: InputDecoration(
-            hintText: "Enter List Name"
+            hintText: "Enter Item Name"
           ),
         ),
       ),
         ElevatedButton(
         onPressed : () {
-          var list = Lists(color: 'c77069', name: _listNameController.text.trim(), id: '', items: [],);
-          createList(list, group);
+          var item = Item(name: _listNameController.text.trim(), id: '', description: '',);
+          createGroup(item, list);
         },
         child: Text('Create!'),
           ),

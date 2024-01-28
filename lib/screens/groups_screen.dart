@@ -13,10 +13,10 @@ import 'package:hack_grocery_app/screens/join_group.dart';
 import 'package:hack_grocery_app/screens/individual_group_screen.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
 
-// var list1 = Lists(color:'ff95b1de', id: '', name: 'Test1', imgUrl: '');
-// var list2 = Lists(color:'ff1531ae', id: '', name: 'Test2', imgUrl: '');
-// var list3 = Lists(color:'ff51c11e', id: '', name: 'Test3', imgUrl: '');
-//List<Lists> listsList = [list1, list2, list3];  
+var list1 = Lists(color:'ff95b1de', id: '', name: 'Test1', imgUrl: '', items: []);
+var list2 = Lists(color:'ff1531ae', id: '', name: 'Test2', imgUrl: '', items: []);
+var list3 = Lists(color:'ff51c11e', id: '', name: 'Test3', imgUrl: '', items: []);
+List<Lists> listsList = [list1, list2, list3];  
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -92,8 +92,6 @@ class _GroupScreenState extends State<GroupScreen> {
         
       });
     }
-
-    Timer? refreshTime;
     
 
     final ThemeData theme = Theme.of(context);
