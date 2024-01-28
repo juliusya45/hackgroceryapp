@@ -20,30 +20,62 @@ class _GroupSettingScreenState extends State<GroupSettingScreen> {
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text(_groupNameController as String),
+      title: Text('temp name'),
+      // title: Text(_groupNameController.text.trim()),
       centerTitle: true,
-      actions: [
-      IconButton(onPressed: () => {},
-       icon: Icon(Icons.drive_file_rename_outline_rounded)),
-    ],
+      
   ),
-      body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            
+            child: Column(
+               
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [ 
-        ElevatedButton(
-        onPressed : () {},
-        child: Text('Leave Group'),
+              children: [
+                //Takes in email input
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(35),
+                      child: SizedBox(
+                        width: 250,
+                        child: TextField(
+                          controller: _groupNameController,
+                          decoration: InputDecoration(
+                            hintText: "Change Group Name"
+                          ),
+                          obscureText: false,
+                        ),
+                      ),
+                    ),
+                    IconButton(onPressed: () => {},
+       icon: Icon(Icons.drive_file_rename_outline_rounded)),
+                  ],
+                ),
+      
+       SizedBox(height: 200),
+       ElevatedButton(
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
-          primary: Color.red,
-        )
-        backgroundColor: Color.red[600],
-          ),
+        primary: Colors.red, // Background color
+        onPrimary: Colors.white,
         ),
-        ],
+        child: const Text(
+            'Leave Group',
+        style: TextStyle(fontSize: 20),
       ),
+    )
+              ],
+            
+
+       
+        
+      ),
+      ),
+    )
       ),
     );
+    
   }
 }
