@@ -61,7 +61,7 @@ class MainApp extends StatelessWidget {
         '/nav': (context) => Nav(groupsList: groupsList, appUser: emptyUser,),
         '/verification': (context) => VerificationScreen(),
         '/group_screen': (context) => GroupScreen(groupsList: groupsList, appUser: emptyUser,),
-        '/loading_home': (context) => LoadingHome(),
+        '/loading_home': (context) => const LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
         '/list_screen': (context) => IndividualGroupScreen(listsList: listsList, group: emptyGroup, appUser: emptyUser,),
         '/group_setting_screen': (context) => GroupSettingScreen(group: emptyGroup, appUser: emptyUser,),

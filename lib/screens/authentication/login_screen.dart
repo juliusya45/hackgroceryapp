@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_grocery_app/screens/loading_screens/loading_home.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -47,7 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
           email: email,
           password: password,
         );
-        if (context.mounted) Navigator.pushReplacementNamed(context, '/loading_home');
+        if (context.mounted) Navigator.pushReplacement(context, MaterialPageRoute<void>(
+      builder: (BuildContext context) => const LoadingHome(),
+    ));
       } 
       on FirebaseAuthException catch (e) 
       {

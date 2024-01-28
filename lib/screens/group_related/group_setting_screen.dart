@@ -48,7 +48,21 @@ class _GroupSettingScreenState extends State<GroupSettingScreen> {
       .doc(code);
     
     //to actually delete:
-    groupRef.delete();
+    //don't actually delete
+    //groupRef.delete();
+  }
+
+  Future<void> rename(Group group) async
+  {
+    //add the reference to the db
+    final db = FirebaseFirestore.instance;
+    //reference the user from the users collection
+    final specificGroupRef = db.collection('groups').doc(widget.group.id).withConverter(
+      fromFirestore:  Group.fromFirestore,
+      toFirestore: (Group groups, _) => groups.toFirestore(),
+      );
+    //update the group onto the db
+    specificGroupRef.set(group);
   }
 
   final _groupNameController = TextEditingController();
@@ -91,7 +105,11 @@ class _GroupSettingScreenState extends State<GroupSettingScreen> {
                         ),
                       ),
                     ),
-                    IconButton(onPressed: () => {},
+                    IconButton(onPressed: () {
+                      group.name = _groupNameController.text.trim();
+                      rename(group);
+                      Navigator.pop(context);
+                    },
        icon: Icon(Icons.drive_file_rename_outline_rounded)),
                   ],
                 ),
