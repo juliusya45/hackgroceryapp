@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:hack_grocery_app/classes/group.dart';
+
 
 class NextPage extends StatelessWidget {
   const NextPage({Key? key}) : super(key: key);
@@ -20,7 +22,6 @@ class NextPage extends StatelessWidget {
 }
 
 final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-import 'package:hack_grocery_app/classes/group.dart';
 
 var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
 var emptyGroup2 = Group(color: 'ff42e6f5', id: '', name: 'Tests2', imgUrl: '');
@@ -111,8 +112,8 @@ class _GroupScreenState extends State<GroupScreen> {
         key: _key,
         // duration: const Duration(milliseconds: 500),
         // distance: 200.0,
-        // type: ExpandableFabType.up,
-        // pos: ExpandableFabPos.left,
+        type: ExpandableFabType.up,
+        //pos: ExpandableFabPos.left,
         // childrenOffset: const Offset(0, 20),
         // fanAngle: 40,
         // openButtonBuilder: RotateFloatingActionButtonBuilder(
