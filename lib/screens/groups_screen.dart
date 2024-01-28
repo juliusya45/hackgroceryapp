@@ -53,7 +53,7 @@ class _GroupScreenState extends State<GroupScreen> {
     List<Group> groupsList = widget.groupsList;
     AppUser appUser = widget.appUser;
 
-    //refresh method to all user to refresh page:
+    //refresh method to allow user to refresh page:
     Future<void> refresh() async
     {
       //!!ALL OF THIS IS SAME AS IN LOADING_HOME!!
@@ -128,7 +128,7 @@ class _GroupScreenState extends State<GroupScreen> {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: [],))));
+                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: [], group: groupsList[index]))));
                   },
                   child: GroupCard(groupItem: groupsList[index]),
                 ),
