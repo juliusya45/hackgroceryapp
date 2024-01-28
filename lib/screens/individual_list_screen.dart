@@ -34,6 +34,8 @@ class IndividualListScreen extends StatefulWidget {
 class _IndividualListScreenState extends State<IndividualListScreen> {
   @override
   Widget build(BuildContext context) {
+    final AppUser appUser = widget.appUser;
+    final List<Group> groupsList = widget.groupsList;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +68,10 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
         ),
   floatingActionButton: const FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
-              onPressed: (null),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => CreateList(appUser, groupsList[0]))));
+              },
       )
     );
   }
