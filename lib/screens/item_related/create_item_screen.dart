@@ -86,6 +86,8 @@ class _CreateItemState extends State<CreateItem> {
           //create an item first and then pass that into our function
           var item = Item(name: _itemNameController.text.trim(), id: '', description: _itemDescController.text.trim(),);
           createItem(item, list);
+          print('item created!');
+          Navigator.pop(context);
         },
         child: Text('Create!'),
           ),
