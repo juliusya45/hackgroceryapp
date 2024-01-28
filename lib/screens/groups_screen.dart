@@ -44,17 +44,17 @@ class _GroupScreenState extends State<GroupScreen> {
       title: Text('Groups'),
       centerTitle: true,
       automaticallyImplyLeading: false,
-      actions: <Widget>[
-      Padding(
-      padding: EdgeInsets.only(right: 20.0),
-      child: GestureDetector(
-        onTap: () {},
-        child: Icon(
-            Icons.more_vert
-            ),
-          )
-        ),
-      ],  
+      // actions: <Widget>[
+      // Padding(
+      // padding: EdgeInsets.only(right: 20.0),
+      // child: GestureDetector(
+      //   onTap: () {},
+      //   child: Icon(
+      //       Icons.more_vert
+      //       ),
+      //     )
+      //   ),
+      // ],  
     ),
       body:
       ListView.builder
