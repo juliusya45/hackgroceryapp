@@ -92,8 +92,6 @@ class _GroupScreenState extends State<GroupScreen> {
         
       });
     }
-
-    Timer? refreshTime;
     
 
     final ThemeData theme = Theme.of(context);
