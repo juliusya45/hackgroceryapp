@@ -102,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: "Enter your email"
                     ),
+                    obscureText: true,
                   ),
                 ),
 
@@ -111,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      hintText: "Password"
+                      hintText: "Password",
                     ),
                   ),
                 ),
