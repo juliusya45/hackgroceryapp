@@ -53,7 +53,7 @@ class _NavState extends State<Nav> {
       ),
       body: <Widget>[
         /// Home page
-        GroupScreen(groupsList: groupsList),
+        GroupScreen(groupsList: groupsList, appUser: appUser,),
 
         /// Notifications page
         const NotificationScreen(),

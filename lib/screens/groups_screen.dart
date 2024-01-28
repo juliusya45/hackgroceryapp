@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/create_group.dart';
 import 'package:hack_grocery_app/screens/join_group.dart';
   
@@ -11,16 +12,18 @@ class NavigationBarApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppUser empty = AppUser(uid: '', username: '', email: '', groups: []);
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const GroupScreen(groupsList: [],),
+      home: GroupScreen(groupsList: [], appUser: empty ,),
     );
   }
 }
 
 class GroupScreen extends StatefulWidget {
-  const GroupScreen({super.key, required this.groupsList});
+  const GroupScreen({super.key, required this.groupsList, required this.appUser});
 
+  final AppUser appUser;
   final List<Group> groupsList;
 
   @override
@@ -34,6 +37,7 @@ class _GroupScreenState extends State<GroupScreen> {
   Widget build(BuildContext context) {
     //this is a list of group objects
     List<Group> groupsList = widget.groupsList;
+    AppUser appUser = widget.appUser;
 
     final ThemeData theme = Theme.of(context);
     return Scaffold(
@@ -129,7 +133,7 @@ class _GroupScreenState extends State<GroupScreen> {
             mouseCursor: MaterialStateMouseCursor.textable,
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => const CreateGroup())));
+                  MaterialPageRoute(builder: ((context) => CreateGroup(appUser: appUser,))));
             },
           ),
           FloatingActionButton.extended(

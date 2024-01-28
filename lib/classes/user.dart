@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hack_grocery_app/classes/group.dart';
 
 class AppUser{
   late String uid;
@@ -32,6 +33,12 @@ class AppUser{
       'username' : username,
       'groups' : groups
     };
+  }
+
+  //method to add a group to a user:
+  addGroup(String groupStr)
+  {
+    groups.add(groupStr);
   }
 
 }
