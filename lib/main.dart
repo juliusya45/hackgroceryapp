@@ -52,7 +52,7 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/list_screen',
+      initialRoute: '/',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => InitialScreen(groupsList: groupsList, appUser: emptyUser,),
