@@ -36,8 +36,8 @@ class _NavState extends State<Nav> {
             label: 'Notifications',
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.logout_sharp),
+            label: 'Log Out',
           ),
         ],
       ),
