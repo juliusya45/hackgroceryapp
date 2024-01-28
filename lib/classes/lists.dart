@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class List
+class Lists
 {
   late String id;
   late String name;
@@ -8,7 +8,7 @@ class List
   late String imgUrl;
 
 
-  List({
+  Lists({
     required this.id,
     required this.name,
     required this.color,
@@ -16,10 +16,10 @@ class List
     });
 
   //method to turn firestore data into a listing
-  factory List.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options,)
+  factory Lists.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot, SnapshotOptions? options,)
   {
     final data = snapshot.data();
-    return List(
+    return Lists(
       id: '',
       name: data!['name'],
       color: data!['color'],
