@@ -3,25 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group_card.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hack_grocery_app/classes/group.dart';
-
-class NextPage extends StatelessWidget {
-  const NextPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('next'),
-      ),
-      body: const Center(
-        child: Text('next'),
-      ),
-    );
-  }
-}
-
-final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-
+import 'package:hack_grocery_app/screens/create_group.dart';
+import 'package:hack_grocery_app/screens/join_group.dart';
+  
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -145,7 +129,7 @@ class _GroupScreenState extends State<GroupScreen> {
             mouseCursor: MaterialStateMouseCursor.textable,
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => const NextPage())));
+                  MaterialPageRoute(builder: ((context) => const CreateGroup())));
             },
           ),
           FloatingActionButton.extended(
@@ -157,7 +141,7 @@ class _GroupScreenState extends State<GroupScreen> {
             icon: const Icon(Icons.group_add),
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => const NextPage())));
+                  MaterialPageRoute(builder: ((context) => const JoinGroup())));
             },
           ),
         ],
