@@ -127,7 +127,8 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
                 elevation: 3,
                 child: InkWell(
                   onTap: () {
-                    //function to view the corresponding group
+                    Navigator.of(context).push(
+                    MaterialPageRoute(builder: ((context) => IndividualListScreen(list: listsList[index]))));
                   },
                   child: ListCard(listItem: listsList[index]),
                 ),
