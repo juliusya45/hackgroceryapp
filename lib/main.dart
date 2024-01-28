@@ -54,7 +54,7 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Inter',useMaterial3: true),
-      initialRoute: '/item_screen',
+      initialRoute: '/',
       routes: {
         //now goes to initialscreen and this checks to see if a user was logged in or not
         '/': (context) => InitialScreen(groupsList: groupsList, appUser: emptyUser,),
@@ -63,8 +63,8 @@ class MainApp extends StatelessWidget {
         '/group_screen': (context) => GroupScreen(groupsList: groupsList, appUser: emptyUser,),
         '/loading_home': (context) => LoadingHome(),
         '/group_card': (context) => GroupCard(groupItem: emptyGroup),
-        '/list_screen': (context) => IndividualGroupScreen(listsList: listsList, group: emptyGroup,),
-        '/group_setting_screen': (context) => GroupSettingScreen(group: emptyGroup,),
+        '/list_screen': (context) => IndividualGroupScreen(listsList: listsList, group: emptyGroup, appUser: emptyUser,),
+        '/group_setting_screen': (context) => GroupSettingScreen(group: emptyGroup, appUser: emptyUser,),
         '/item_screen' : (context) => IndividualListScreen(list: list1)
       },
     );

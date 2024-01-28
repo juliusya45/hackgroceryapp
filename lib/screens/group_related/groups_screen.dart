@@ -45,17 +45,12 @@ class GroupScreen extends StatefulWidget {
 class _GroupScreenState extends State<GroupScreen> {
   final _key = GlobalKey<ExpandableFabState>();
 
-  
-
-  @override
-  Widget build(BuildContext context) {
-    //this is a list of group objects
-    List<Group> groupsList = widget.groupsList;
-    AppUser appUser = widget.appUser;
-
-    //refresh method to allow user to refresh page:
+   //refresh method to allow user to refresh page:
     Future<void> refresh() async
     {
+        //this is a list of group objects
+      List<Group> groupsList = widget.groupsList;
+      AppUser appUser = widget.appUser;
       //!!ALL OF THIS IS SAME AS IN LOADING_HOME!!
       //first remove everything currently in the list
       groupsList.removeRange(0, groupsList.length);
@@ -94,6 +89,21 @@ class _GroupScreenState extends State<GroupScreen> {
         
       });
     }
+
+    @override
+    void initState() {
+    // TODO: implement initState
+    super.initState();
+    refresh();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //this is a list of group objects
+    List<Group> groupsList = widget.groupsList;
+    AppUser appUser = widget.appUser;
+
+   
     
 
     final ThemeData theme = Theme.of(context);
@@ -130,7 +140,12 @@ class _GroupScreenState extends State<GroupScreen> {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: [], group: groupsList[index]))));
+                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: [], group: groupsList[index], appUser: appUser,))));
+                    Future.delayed(const Duration(seconds: 1), () {
+                      setState(() {
+                        refresh();
+                      });
+                    });
                   },
                   child: GroupCard(groupItem: groupsList[index]),
                 ),

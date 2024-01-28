@@ -40,5 +40,15 @@ class AppUser{
   {
     groups.add(groupStr);
   }
+  //method to remove group from a user
+  removeGroup(String groupStr)
+  {
+    if(groups.contains(groupStr))
+    {
+      groups.remove(groupStr);
+    }
+    else
+      return "Group ID not found";
+  }
 
 }
