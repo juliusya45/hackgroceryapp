@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hack_grocery_app/screens/individual_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 
@@ -12,26 +11,26 @@ class NavigationBarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const IndividualGroupScreen(),
+      home: const IndividualListScreen(),
     );
   }
 }
 
-class IndividualGroupScreen extends StatefulWidget {
-  const IndividualGroupScreen({super.key});
+class IndividualListScreen extends StatefulWidget {
+  const IndividualListScreen({super.key});
 
   @override
-  State<IndividualGroupScreen> createState() => _IndividualGroupScreenState();
+  State<IndividualListScreen> createState() => _IndividualListScreenState();
 }
 
-class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
+class _IndividualListScreenState extends State<IndividualListScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Group Name For Now'),
+      title: Text('List Name For Now'),
       centerTitle: true,
       actions: <Widget>[
       Padding(
@@ -45,36 +44,17 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
         ),
       ],  
     ),
-    body: Card(
+      body: Card(
       child: InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: ((context) => const IndividualListScreen())));
-      },
+      onTap: () {},
       child: Container(
         
         width: 500.0,
         height: 150.0,
-    ),
-  ),
-),
-      // body:Card(
-      //     shadowColor: Colors.transparent,
-      //     margin: const EdgeInsets.all(8.0),
-      //     child: InkWell(
-      //       onTap: (){}
-      //     ),
-      //     // child: SizedBox.expand(
-      //       child: Containter(
-
-      //       )
-      //       // child: Center(
-      //         // child: Text(
-      //         //   'Home page',
-      //         //   style: theme.textTheme.titleLarge,
-      //         ),
-            // ),
-        //   ),
-        // ),
+              
+            ),
+          ),
+        ),
   floatingActionButton: const FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
               onPressed: (null),
