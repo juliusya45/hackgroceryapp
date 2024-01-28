@@ -94,9 +94,9 @@ class _GroupScreenState extends State<GroupScreen> {
         floatingActionButton: ExpandableFab(
         key: _key,
         // duration: const Duration(milliseconds: 500),
-        // distance: 200.0,
+        distance: 70.0,
         type: ExpandableFabType.up,
-        //pos: ExpandableFabPos.left,
+        pos: ExpandableFabPos.right,
         // childrenOffset: const Offset(0, 20),
         // fanAngle: 40,
         // openButtonBuilder: RotateFloatingActionButtonBuilder(
@@ -121,7 +121,6 @@ class _GroupScreenState extends State<GroupScreen> {
         //   },
         // ),
         overlayStyle: ExpandableFabOverlayStyle(
-          // color: Colors.black.withOpacity(0.5),
           blur: 5,
         ),
         onOpen: () {
@@ -137,21 +136,25 @@ class _GroupScreenState extends State<GroupScreen> {
           debugPrint('afterClose');
         },
         children: [
-          FloatingActionButton.small(
+          FloatingActionButton.extended(
             // shape: const CircleBorder(),
             heroTag: null,
-            child: const Icon(Icons.edit),
+            icon: const Icon(Icons.add),
+            tooltip: "Create Group",
+            label: const Text('Create Group'),
+            mouseCursor: MaterialStateMouseCursor.textable,
             onPressed: () {
-              const SnackBar snackBar = SnackBar(
-                content: Text("SnackBar"),
-              );
-              scaffoldKey.currentState?.showSnackBar(snackBar);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: ((context) => const NextPage())));
             },
           ),
-          FloatingActionButton.small(
+          FloatingActionButton.extended(
             // shape: const CircleBorder(),
             heroTag: null,
-            child: const Icon(Icons.search),
+            mouseCursor: MaterialStateMouseCursor.textable,
+            tooltip: "Add Group",
+            label: const Text('Add Group'),
+            icon: const Icon(Icons.group_add),
             onPressed: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: ((context) => const NextPage())));
