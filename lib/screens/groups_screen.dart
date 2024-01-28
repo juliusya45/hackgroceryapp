@@ -206,11 +206,16 @@ class _GroupScreenState extends State<GroupScreen> {
             tooltip: "Add Group",
             label: const Text('Add Group'),
             icon: const Icon(Icons.group_add),
-            onPressed: () {
-              //Navigator.of(context).push(MaterialPageRoute (builder: ((context) => const JoinGroup())));
-              const JoinGroup();
-            },
-          ),
+            onPressed: ()
+              async {
+              await Navigator.push(context, MaterialPageRoute(builder: (context)=> JoinGroup()));
+              Future.delayed(const Duration(seconds: 2), () {
+                setState(() {
+                  refresh();
+                });
+            });
+              }
+              ),
         ],
       ),
     );    
