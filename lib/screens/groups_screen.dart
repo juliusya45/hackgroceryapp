@@ -151,8 +151,8 @@ class _GroupScreenState extends State<GroupScreen> {
             label: const Text('Add Group'),
             icon: const Icon(Icons.group_add),
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: ((context) => const JoinGroup())));
+              //Navigator.of(context).push(MaterialPageRoute(builder: ((context) => const JoinGroup())));
+              const JoinGroup();
             },
           ),
         ],
