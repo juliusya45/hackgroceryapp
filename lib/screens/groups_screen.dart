@@ -128,7 +128,7 @@ class _GroupScreenState extends State<GroupScreen> {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: listsList,))));
+                    MaterialPageRoute(builder: ((context) => IndividualGroupScreen(listsList: [],))));
                   },
                   child: GroupCard(groupItem: groupsList[index]),
                 ),

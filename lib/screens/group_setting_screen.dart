@@ -54,7 +54,7 @@ class _GroupSettingScreenState extends State<GroupSettingScreen> {
                   ],
                 ),
       
-       SizedBox(height: 200),
+       SizedBox(height: 400),
        ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
