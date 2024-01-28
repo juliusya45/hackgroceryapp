@@ -6,6 +6,8 @@ import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 
 var emptyGroup = Group(color: 'ff32a852', id: '', name: 'Tests', imgUrl: '');
+var emptyGroup2 = Group(color: 'ff42e6f5', id: '', name: 'Tests2', imgUrl: '');
+
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
@@ -51,6 +53,34 @@ class _GroupScreenState extends State<GroupScreen> {
       ListView(
         padding: const EdgeInsets.all(8.0),
         children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup2),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
+          Container(
+            padding: const EdgeInsets.all(4.0),
+            child: GroupCard(groupItem: emptyGroup),
+          ),
           Container(
             padding: const EdgeInsets.all(4.0),
             child: GroupCard(groupItem: emptyGroup),
