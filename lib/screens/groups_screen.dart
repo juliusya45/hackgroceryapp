@@ -5,9 +5,7 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/screens/create_group.dart';
 import 'package:hack_grocery_app/screens/join_group.dart';
-
-final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-
+  
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
