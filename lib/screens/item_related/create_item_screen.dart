@@ -21,14 +21,15 @@ class CreateItem extends StatefulWidget {
 
 class _CreateItemState extends State<CreateItem> {
 
-  final _listNameController = TextEditingController();
+  final _itemNameController = TextEditingController();
+  final _itemDescController = TextEditingController();
 
-  Future<void> createGroup(Item item, Lists list) async
+  Future<void> createItem(Item item, Lists list) async
   {
-    //add the list to the database:
+    //add the item
     final db = FirebaseFirestore.instance;
     final docRef = db
-    .collection("items")
+    .collection("item")
     .withConverter(
       fromFirestore: Item.fromFirestore,
       toFirestore: (Item item, option) => item.toFirestore(),
@@ -37,12 +38,11 @@ class _CreateItemState extends State<CreateItem> {
     //this method actually adds the list
     await docRef.set(item);
 
-    //add the list to the group
-    //what's actually happening is that I add the list to the group
+    //add the item id to the list
     list.addItem(docRef.id);
     final listsRef = db.collection("list").withConverter(
       fromFirestore: Lists.fromFirestore, toFirestore: (Lists list, option) => list.toFirestore()
-      ).doc(FirebaseAuth.instance.currentUser!.uid);
+      ).doc(list.id);
     await listsRef.set(list);
 
   }
@@ -65,16 +65,29 @@ class _CreateItemState extends State<CreateItem> {
         Padding(
           padding: const EdgeInsets.all(25),
             child: TextField(
-            controller: _listNameController,
+            controller: _itemNameController,
             decoration: InputDecoration(
+              border: OutlineInputBorder(),
             hintText: "Enter Item Name"
+          ),
+        ),
+      ),
+      Padding(
+          padding: const EdgeInsets.all(25),
+            child: TextFormField(
+            controller: _itemDescController,
+            decoration: InputDecoration(
+            hintText: "Item Description"
           ),
         ),
       ),
         ElevatedButton(
         onPressed : () {
-          var item = Item(name: _listNameController.text.trim(), id: '', description: '',);
-          createGroup(item, list);
+          //create an item first and then pass that into our function
+          var item = Item(name: _itemNameController.text.trim(), id: '', description: _itemDescController.text.trim(),);
+          createItem(item, list);
+          print('item created!');
+          Navigator.pop(context);
         },
         child: Text('Create!'),
           ),

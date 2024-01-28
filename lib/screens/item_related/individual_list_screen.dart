@@ -2,79 +2,78 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
-import 'package:hack_grocery_app/classes/user.dart';
-import 'package:hack_grocery_app/screens/list_related/create_list_screen.dart';
-import 'package:hack_grocery_app/screens/item_related/individual_list_screen.dart';
-import 'package:hack_grocery_app/screens/logout_screen.dart';
-import 'package:hack_grocery_app/screens/notification_screen.dart';
-import 'package:hack_grocery_app/classes/list_card.dart';
+import 'package:hack_grocery_app/classes/item.dart';
+import 'package:hack_grocery_app/classes/item_card.dart';
 import 'package:hack_grocery_app/classes/lists.dart';
+import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/screens/item_related/create_item_screen.dart';
+import 'package:hack_grocery_app/screens/logout_screen.dart';
+import 'package:hack_grocery_app/screens/nav_screen.dart';
+import 'package:hack_grocery_app/screens/notification_screen.dart';
 
-final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-
-//This screen is to show multiple lists once you tap a group
-
+//This screen is used when a list is clicked. Shows items
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      //home: const IndividualGroupScreen(listsList: [],),
+      theme: ThemeData(useMaterial3: true)
     );
   }
 }
 
-class IndividualGroupScreen extends StatefulWidget {
-  const IndividualGroupScreen({super.key, required this.listsList, required this.group});
+class IndividualListScreen extends StatefulWidget {
 
-  final Group group;
-  final List<Lists> listsList;
-
+  const IndividualListScreen({super.key, required this.list,});
+  final Lists list;
+  
   @override
-  State<IndividualGroupScreen> createState() => _IndividualGroupScreenState();
+  State<IndividualListScreen> createState() => _IndividualListScreenState();
 }
 
-class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
+class _IndividualListScreenState extends State<IndividualListScreen> {
+  //list to hold items that are in this list
+  List<Item> items = [];
 
   //refresh method to allow user to refresh page:
+  //and used to get items from db
     Future<void> refresh() async
     {
       //!!ALL OF THIS IS SAME AS IN LOADING_HOME!!
       //first remove everything currently in the list
-      widget.listsList.removeRange(0, widget.listsList.length);
+      print('List id: ' + widget.list.id);
+      items.removeRange(0, items.length);
       var database = FirebaseFirestore.instance;
         //create a reference to the db:
         //defining the reference to our database:
-      final specificGroupRef = database.collection('groups').doc(widget.group.id).withConverter(
-      fromFirestore:  Group.fromFirestore,
-      toFirestore: (Group groups, _) => groups.toFirestore(),
-      );
-      //once data populates from the database fill the list
-      //of lists that a group has
-
-      final docSnap = await specificGroupRef.get();
-
-      final listGroup = docSnap.data();
-
-      //for every list that a group has
-      for(var listId in listGroup!.lists)
-      {
-        //get that list from the db:
-        final listRef = database.collection('list').doc(listId).withConverter(
+      final specificListRef = database.collection('list').doc(widget.list.id).withConverter(
       fromFirestore:  Lists.fromFirestore,
       toFirestore: (Lists list, _) => list.toFirestore(),
       );
-        final listSnap = await listRef.get();
-        //create the list object
-        final list = listSnap.data();
-        //add id to list:
-        list?.id = listSnap.id;
+      //once data populates from the database fill the list
+      //of items that our list has
+
+      final docSnap = await specificListRef.get();
+
+      final listDoc = docSnap.data();
+
+      //for every item that a list has
+      for(var itemId in listDoc!.items)
+      {
+        //get that item from the db:
+        final itemRef = database.collection('item').doc(itemId).withConverter(
+      fromFirestore:  Item.fromFirestore,
+      toFirestore: (Item item, _) => item.toFirestore(),
+      );
+        final itemSnap = await itemRef.get();
+        //create the item object
+        final item = itemSnap.data();
         //add that list
-        print(list?.id);
-        widget.listsList.add(list!);
+        print(item?.id);
+        items.add(item!);
       }
       onError: (e) => print(e);
       //just refresh the entire screen
@@ -87,21 +86,19 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
     void initState() {
     // TODO: implement initState
     super.initState();
+    //refresh when the user gets to this screen
     refresh();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    //this is a list of lists objects
-    List<Lists> listsList = widget.listsList;
-
-    
-
+    final Lists list = widget.list;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Lists'),
+      title: Text('Items'),
       centerTitle: true,
       actions: <Widget>[
       Padding(
@@ -120,7 +117,8 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
         onRefresh: refresh,
         child: ListView.builder
         (
-          itemCount: listsList.length,
+          //build an item card for each item stored
+          itemCount: items.length,
           itemBuilder: (context, index)
           {
             return Padding(
@@ -129,10 +127,9 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
                 elevation: 3,
                 child: InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => IndividualListScreen(list: listsList[index]))));
+                    //this is where code would go to get a detailed menu to show for each item
                   },
-                  child: ListCard(listItem: listsList[index]),
+                  child: ItemCard(itemInst: items[index],),
                 ),
               ),
               );
@@ -141,14 +138,15 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
       ),
   floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
-              onPressed: ()  async {
-              await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateList(group: widget.group)));
+              onPressed: () async {
+              //when the add item button is created go to the screen to add an item
+              await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateItem(list: list,)));
               Future.delayed(const Duration(seconds: 2), () {
                 setState(() {
                   refresh();
                 });
               });
-            },
+              }
       )
     );
   }
