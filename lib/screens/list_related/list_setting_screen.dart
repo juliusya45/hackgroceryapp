@@ -3,17 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hack_grocery_app/classes/group.dart';
+import 'package:hack_grocery_app/classes/lists.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/group_related/groups_screen.dart';
+import 'package:hack_grocery_app/screens/group_related/individual_group_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
 import 'package:clipboard/clipboard.dart';
 
 class ListSettingScreen extends StatefulWidget {
-  const ListSettingScreen({super.key, required this.group, required this.appUser});
+  const ListSettingScreen({super.key, required this.list, required this.group, required this.appUser});
 
   final AppUser appUser;
   final Group group;
+  final Lists list;
 
   @override
   State<ListSettingScreen> createState() => _ListSettingScreenState();
@@ -21,48 +24,36 @@ class ListSettingScreen extends StatefulWidget {
 
 class _ListSettingScreenState extends State<ListSettingScreen> {
 
-  Future<void> removeGroup(AppUser appUser, String code) async
+  Future<void> removeList(Lists list, Group group) async
   {
     //add the reference to the db
     final db = FirebaseFirestore.instance;
     //reference the user from the users collection
     final docRef = db
-    .collection("users")
-    .withConverter(
-      fromFirestore: AppUser.fromFirestore,
-      toFirestore: (AppUser user, option) => user.toFirestore(),
-    )
-    .doc(FirebaseAuth.instance.currentUser!.uid);
-    appUser.removeGroup(code);
-
-    //this method updates the user in db to not have the group
-    await docRef.set(appUser);
-
-    //Now need to delete the group from the db
-    final groupRef = db
-    .collection('lists')
+    .collection("groups")
     .withConverter(
       fromFirestore: Group.fromFirestore,
       toFirestore: (Group group, option) => group.toFirestore(),
-      )
-      .doc(code);
-    
-    //to actually delete:
-    groupRef.delete();
+    )
+    .doc(group.id);
+    group.removeList(list.id);
+
+    //this method updates the group to not have that list anymore:
+    await docRef.set(group);
+    //we aren't going to delete the list from the db
   }
 
   final _groupNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var appUser= widget.appUser;
-
-      var group = widget.group;
+    var group = widget.group;
+    var list = widget.list;
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text(group.name),
+      title: Text(list.name),
       // title: Text(_groupNameController.text.trim()),
       centerTitle: true,
       
@@ -102,10 +93,11 @@ class _ListSettingScreenState extends State<ListSettingScreen> {
        ElevatedButton(
         onPressed: () {
           //add function here to delete group id from user:
-          removeGroup(appUser, group.id);
+          
+          removeList(list, group);
           Navigator.pushAndRemoveUntil(
             context,   
-            MaterialPageRoute(builder: (BuildContext context) => GroupScreen(groupsList: [], appUser: appUser,)), 
+            MaterialPageRoute(builder: (BuildContext context) => IndividualGroupScreen(listsList: [], group: group, appUser: widget.appUser,)), 
             ModalRoute.withName('/group_screen') // Replace this with your root screen's route name (usually '/')
         );
         },

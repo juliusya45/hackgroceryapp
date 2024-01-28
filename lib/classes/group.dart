@@ -47,4 +47,14 @@ class Group
   {
     lists.add(listStr);
   }
+
+  removeList(String listStr)
+  {
+    if(lists.contains(listStr))
+    {
+      lists.remove(listStr);
+    }
+    else
+      return "List ID not found";
+  }
 }

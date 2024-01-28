@@ -28,6 +28,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notifications'),
+        automaticallyImplyLeading: false,
       ),
       body: const Padding(
           padding: EdgeInsets.all(8.0),

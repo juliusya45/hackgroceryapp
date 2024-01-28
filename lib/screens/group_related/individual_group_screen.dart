@@ -58,6 +58,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
       //of lists that a group has
 
       final docSnap = await specificGroupRef.get();
+      widget.group.id = specificGroupRef.id;
 
       final listGroup = docSnap.data();
 
@@ -139,7 +140,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => IndividualListScreen(list: listsList[index]))));
+                    MaterialPageRoute(builder: ((context) => IndividualListScreen(list: listsList[index], group: widget.group, appUser: widget.appUser,))));
                   },
                   child: ListCard(listItem: listsList[index]),
                 ),

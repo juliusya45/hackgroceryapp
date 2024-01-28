@@ -8,6 +8,7 @@ import 'package:hack_grocery_app/classes/lists.dart';
 import 'package:hack_grocery_app/classes/user.dart';
 import 'package:hack_grocery_app/screens/group_related/group_setting_screen.dart';
 import 'package:hack_grocery_app/screens/item_related/create_item_screen.dart';
+import 'package:hack_grocery_app/screens/list_related/list_setting_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
@@ -28,8 +29,10 @@ class NavigationBarApp extends StatelessWidget {
 
 class IndividualListScreen extends StatefulWidget {
 
-  const IndividualListScreen({super.key, required this.list,});
+  const IndividualListScreen({super.key, required this.list, required this.group, required this.appUser});
   final Lists list;
+  final Group group;
+  final AppUser appUser;
   
   @override
   State<IndividualListScreen> createState() => _IndividualListScreenState();
@@ -107,7 +110,7 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
       padding: EdgeInsets.only(right: 20.0),
       child: GestureDetector(
         onTap: () async {
-          await Navigator.push(context, MaterialPageRoute(builder: (context)=> GroupSettingScreen(group: widget.group, appUser: widget.appUser,)));
+          await Navigator.push(context, MaterialPageRoute(builder: (context)=> ListSettingScreen(list: list, group: widget.group, appUser: widget.appUser,)));
               Future.delayed(const Duration(seconds: 1), () {
                 setState(() {
                   refresh();
