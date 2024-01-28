@@ -76,15 +76,15 @@ Widget build(BuildContext context) {
         screens: _buildScreens(),
         items: _navBarsItems(),
         confineInSafeArea: true,
-        backgroundColor: Colors.white, // Default is Colors.white.
+        backgroundColor: Colors.white70, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
         resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
         stateManagement: true, // Default is true.
         hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
         decoration: NavBarDecoration(
+          border: Border(top: BorderSide(color: Theme.of(context).dividerColor, width: 1.25)),
           //borderRadius: BorderRadius.circular(10.0),
-          border: BoxBorder(),
-          colorBehindNavBar: Colors.grey,
+          colorBehindNavBar: Colors.white,
         ),
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
@@ -116,19 +116,19 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
               icon: Icon(Icons.groups),
               title: ("Groups"),
               activeColorPrimary: Colors.green,
-              inactiveColorPrimary: Colors.grey,
+              inactiveColorPrimary: Colors.blueGrey,
             ),
             PersistentBottomNavBarItem(
               icon: Icon(Icons.notifications),
               title: ("Notifications"),
               activeColorPrimary: Colors.green,
-              inactiveColorPrimary: Colors.grey,
+              inactiveColorPrimary: Colors.blueGrey,
             ),
             PersistentBottomNavBarItem(
             icon: Icon(Icons.logout),
             title: ("Logout"),
             activeColorPrimary: Colors.green,
-              inactiveColorPrimary: Colors.grey,
+              inactiveColorPrimary: Colors.blueGrey,
             ),
         ];
     }   
