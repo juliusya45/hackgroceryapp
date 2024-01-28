@@ -34,17 +34,13 @@ class IndividualGroupScreen extends StatefulWidget {
 }
 
 class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
-  @override
-  Widget build(BuildContext context) {
-    //this is a list of lists objects
-    List<Lists> listsList = widget.listsList;
 
-    //refresh method to allow user to refresh page:
+  //refresh method to allow user to refresh page:
     Future<void> refresh() async
     {
       //!!ALL OF THIS IS SAME AS IN LOADING_HOME!!
       //first remove everything currently in the list
-      listsList.removeRange(0, listsList.length);
+      widget.listsList.removeRange(0, widget.listsList.length);
       var database = FirebaseFirestore.instance;
         //create a reference to the db:
         //defining the reference to our database:
@@ -72,7 +68,7 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
         final list = listSnap.data();
         //add that list
         print(list?.id);
-        listsList.add(list!);
+        widget.listsList.add(list!);
       }
       onError: (e) => print(e);
       //just refresh the entire screen
@@ -80,6 +76,20 @@ class _IndividualGroupScreenState extends State<IndividualGroupScreen> {
         
       });
     }
+
+    @override
+    void initState() {
+    // TODO: implement initState
+    super.initState();
+    refresh();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //this is a list of lists objects
+    List<Lists> listsList = widget.listsList;
+
+    
 
     final ThemeData theme = Theme.of(context);
     return Scaffold(
