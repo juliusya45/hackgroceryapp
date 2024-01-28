@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_grocery_app/classes/group.dart';
 import 'package:hack_grocery_app/classes/user.dart';
+import 'package:hack_grocery_app/screens/create_list_screen.dart';
 import 'package:hack_grocery_app/screens/logout_screen.dart';
 import 'package:hack_grocery_app/screens/nav_screen.dart';
 import 'package:hack_grocery_app/screens/notification_screen.dart';
@@ -66,12 +67,12 @@ class _IndividualListScreenState extends State<IndividualListScreen> {
             ),
           ),
         ),
-  floatingActionButton: const FloatingActionButton(
+  floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add_box_outlined),
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: ((context) => CreateList(appUser, groupsList[0]))));
-              },
+                    MaterialPageRoute(builder: ((context) => CreateList(appUser: appUser, group:  groupsList[0]))));
+              }
       )
     );
   }
