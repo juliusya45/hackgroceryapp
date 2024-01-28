@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'item.dart';
 
 class ItemCard extends StatelessWidget{
-  const ItemCard({
+  ItemCard({
     super.key,
     required this.itemInst,
-    required this.checkVal,
-    required this.onChanged,
   });
-  final bool checkVal;
-  final ValueChanged<bool> onChanged;
+  bool checkVal = false;
+  late ValueChanged<bool> onChanged;
   final Item itemInst;
 
   @override
