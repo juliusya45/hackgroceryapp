@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
         hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
         decoration: NavBarDecoration(
           //borderRadius: BorderRadius.circular(10.0),
-          border: BoxBorder(),
+          
           colorBehindNavBar: Colors.grey,
         ),
         popAllScreensOnTapOfSelectedTab: true,
